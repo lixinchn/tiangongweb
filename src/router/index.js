@@ -1,15 +1,23 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import Hello from 'components/Hello'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
-Vue.use(Router)
-
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    }
-  ]
+const route = new VueRouter({
+    mode:'history',
+    routes:[{
+    path:'/index',component:require('../views/index')
+  },{
+    path:'/rank',component:require('../views/rank')
+  },{
+    path:'/ringtone',component:require('../views/ringtone')
+  },{
+    path:'/plist',component:require('../views/plist')
+  },{
+    path:'/singer',component:require('../views/singer')
+  },{
+    path:'*',redirect:'/index'
+  }]
 })
+
+
+export default route;

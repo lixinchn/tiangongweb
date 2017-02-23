@@ -33,6 +33,7 @@ module.exports = {
   },
   module: {
     rules: [
+      /*
       {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
@@ -42,6 +43,7 @@ module.exports = {
           formatter: require('eslint-friendly-formatter')
         }
       },
+      */
       {
         test: /\.vue$/,
         loader: 'vue-loader',
