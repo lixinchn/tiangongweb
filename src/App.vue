@@ -2,6 +2,9 @@
   <div id="app">
     <tgHead></tgHead>
     <div class="main">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>

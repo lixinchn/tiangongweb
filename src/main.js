@@ -11,7 +11,6 @@ import './assets/css/flexslider.css'
 import './assets/css/bootstrap.css'
 // import './assets/css/lightbox.min.css'
 // import './assets/css/ytplayer.css'
-// import 'vue-strap'
 import './assets/css/theme.css'
 import './assets/css/custom.css'
 
