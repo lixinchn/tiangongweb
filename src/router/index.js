@@ -7,11 +7,9 @@ const route = new VueRouter({
     routes:[{
     path:'/index',component:require('../views/index')
   },{
-    path:'/rank',component:require('../views/rank')
+    path:'/dataset',component:require('../views/dataset')
   },{
     path:'/ringtone',component:require('../views/ringtone')
-  },{
-    path:'/plist',component:require('../views/plist')
   },{
     path:'/singer',component:require('../views/singer')
   },{
