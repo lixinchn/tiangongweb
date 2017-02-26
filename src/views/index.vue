@@ -37,8 +37,8 @@
     </section>
 
     <section class="image-bg overlay parallax">
-      <div class="background-image-holder" style="background: url(../assets/img/nav_idx.jpg)">
-        <img alt="Background" class="background-image" src="../assets/img/nav_idx.jpg">
+      <div class="background-image-holder" v-bind:class="{fadeIn: isFadeIn}" v-bind:style="{background: 'url(' + holderBackgroundUrl + ')', 'background-position': backgroundPosition, transform: 'translate3d(0px,' + holderTranslateY + ',0px)'}">
+        <img alt="Background" class="background-image" src="../assets/img/nav_idx.jpg" v-bind:style="{display: isNone}">
       </div>
       <div class="container">
         <div class="row">
@@ -110,8 +110,54 @@
       </div>
     </section>
   </div>
-
-
 </template>
+
+<script type="es6">
+  export default {
+    data() {
+      return {
+        msg: 'test',
+        isFadeIn: false,
+        holderBackgroundUrl: '',
+        isNone: false,
+        backgroundPosition: 'initial !important',
+        holderTranslateY: '0px',
+      }
+    },
+
+    mounted() {
+      setTimeout(() => {
+        // console.log(this.$el.querySelectorAll('.background-image-holder'));
+        // this.$el.querySelectorAll('.background-image-holder').forEach(function($holder) {
+        //     // $(this).addClass('fadeIn');
+        //     console.log($holder)
+        // });
+        this.isFadeIn = true
+      }, 200)
+
+      this.backgroundFadeIn()
+      this.scrollListener()
+    },
+
+    methods: {
+      backgroundFadeIn() {
+        let holder = this.$el.querySelector('.background-image-holder')
+        let holderBackgroundUrl = holder.children[0].src
+        this.holderBackgroundUrl = holderBackgroundUrl
+        this.isNone = true
+      },
+
+      scrollListener() {
+        window.onscroll = (e) => {
+          console.log(window.pageYOffset)
+          console.log(document.body.scrollHeight)
+          // 600 * ()
+          this.holderTranslateY = (600 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
+        }
+      },
+    }
+    
+  }
+</script>
 <style>
 </style>
