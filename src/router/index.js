@@ -9,9 +9,9 @@ const route = new VueRouter({
   },{
     path:'/dataset',component:require('../views/dataset')
   },{
-    path:'/ringtone',component:require('../views/ringtone')
+    path:'/about_us',component:require('../views/about_us')
   },{
-    path:'/singer',component:require('../views/singer')
+    path:'/races', component:require('../views/races')
   },{
     path:'*',redirect:'/index'
   }]

@@ -1,7 +1,6 @@
 <template>
   <div class="main-container">
     <section class="image-bg bg-dark parallax overlay pt120 pb120">
-      <!-- <div class="background-image-holder"> -->
       <div class="background-image-holder" v-bind:class="{fadeIn: isFadeIn}" v-bind:style="{background: 'url(' + holderBackgroundUrl + ')', 'background-position': backgroundPosition, transform: 'translate3d(0px,' + holderTranslateY + ',0px)'}">
         <img alt="Background Image" class="background-image" src="../assets/img/shujuji.jpg" v-bind:style="{display: isNone}">
       </div>
@@ -101,11 +100,6 @@
 
     mounted() {
       setTimeout(() => {
-        // console.log(this.$el.querySelectorAll('.background-image-holder'));
-        // this.$el.querySelectorAll('.background-image-holder').forEach(function($holder) {
-        //     // $(this).addClass('fadeIn');
-        //     console.log($holder)
-        // });
         this.isFadeIn = true
       }, 200)
 
