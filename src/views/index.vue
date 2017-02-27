@@ -50,7 +50,7 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="feature feature-1 boxed">
-              <a href="dataset.html">
+              <a href="dataset">
                 <div class="text-center">
                   <i class="icon ti ti-bar-chart"></i>
                   <h3 class="uppercase">数据集</h3>
@@ -61,7 +61,7 @@
           </div>
           <div class="col-sm-4">
             <div class="feature feature-1 boxed">
-              <a href="races.html">
+              <a href="races">
                 <div class="text-center">
                   <i class="ti-infinite icon"></i>
                   <h3 class="uppercase">比赛</h3>
@@ -72,7 +72,7 @@
           </div>
           <div class="col-sm-4">
             <div class="feature feature-1 boxed">
-              <a href="about_us.html">
+              <a href="about_us">
                 <div class="text-center">
                   <i class="ti-heart icon"></i>
                   <h3 class="uppercase">关于我们</h3>

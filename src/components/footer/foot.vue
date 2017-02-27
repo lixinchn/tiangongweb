@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6">
-          <a href="about_us.html">
+          <a href="about_us">
             <h4 class="title">关于我们</h4>
           </a>
         </div>
