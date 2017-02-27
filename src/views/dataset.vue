@@ -1,8 +1,9 @@
 <template>
   <div class="main-container">
     <section class="image-bg bg-dark parallax overlay pt120 pb120">
-      <div class="background-image-holder">
-        <img alt="Background Image" class="background-image" src="img/shujuji.jpg">
+      <!-- <div class="background-image-holder"> -->
+      <div class="background-image-holder" v-bind:class="{fadeIn: isFadeIn}" v-bind:style="{background: 'url(' + holderBackgroundUrl + ')', 'background-position': backgroundPosition, transform: 'translate3d(0px,' + holderTranslateY + ',0px)'}">
+        <img alt="Background Image" class="background-image" src="../assets/img/shujuji.jpg" v-bind:style="{display: isNone}">
       </div>
       <div class="container">
         <div class="row">
@@ -22,24 +23,33 @@
             <h4 class="uppercase mb80">天工智能数据研究院数据集</h4>
             <div class="tabbable">
                 <ul class="nav nav-pills nav-stacked col-md-3" id="accordion">
-                    <li class="active"><a href="#intro" data-toggle="tab">数据集介绍</a></li>
-                    <li v-for="panel in context.panel"><a v-bind:href="'#' + panel.id" data-toggle="collapse" data-parent="#accordion">{{panel.panelTitle}}</a></li>
-                    <div v-for="panel in context.panel" v-bind:id="panel.id" class="collapse">
+                    <!-- <li class="active"><a href="#intro" data-toggle="tab">数据集介绍</a></li>
+                    <li v-for="panel in context.panel"><a v-bind:href="'#collapse' + panel.id" data-toggle="collapse" data-parent="#accordion">{{panel.panelTitle}}</a>
+                      <div v-bind:id="'collapse' + panel.id" class="collapse">
                         <ul class="nav nav-pills nav-stacked col-md-offset-1">
                         <li v-for="dataset in panel.dataset" v-bind:class="dataset.initState"><a v-bind:href="'#' + dataset.tabid" data-toggle="tab">{{dataset.tabTitle}}</a></li>
                         </ul>
-                    </div>
+                      </div>
+                    </li> -->
+                    <ui-collapsible title="数据集介绍">
+                      <li><a href="#intro" data-toggle="tab">详细介绍</a></li>
+                    </ui-collapsible>
+                    <ui-collapsible v-for="panel in context.panel" v-bind:title="panel.panelTitle">
+                        <li v-for="dataset in panel.dataset" v-bind:class="dataset.initState"><a v-bind:href="'#' + dataset.tabid" data-toggle="tab">{{dataset.tabTitle}}</a></li>
+                    </ui-collapsible>
                 </ul>
                 
                 <ul class="tab-content col-md-9">
-                  <div class="tab-pane active" id="intro">
-                    <h3> 简介 </h3>
-                    <p>
-                      Ut sagittis consectetur tortor imperdiet mattis. Aenean faucibus massa vitae consectetur hendrerit. Sed facilisis justo id sem ullamcorper ultricies. Aliquam erat volutpat. Ut blandit purus erat, vitae vestibulum odio pharetra vitae. Morbi consectetur eleifend diam vel tristique. Duis non nisi quam. Aliquam commodo nunc ex, ut sollicitudin nisi luctus at. Nulla id magna maximus, rutrum orci eu, iaculis leo.
-                    </p>
+                  <div>
+                    <div class="tab-pane active" id="intro">
+                      <h3> 简介 </h3>
+                      <p>
+                        Ut sagittis consectetur tortor imperdiet mattis. Aenean faucibus massa vitae consectetur hendrerit. Sed facilisis justo id sem ullamcorper ultricies. Aliquam erat volutpat. Ut blandit purus erat, vitae vestibulum odio pharetra vitae. Morbi consectetur eleifend diam vel tristique. Duis non nisi quam. Aliquam commodo nunc ex, ut sollicitudin nisi luctus at. Nulla id magna maximus, rutrum orci eu, iaculis leo.
+                      </p>
+                    </div>
                   </div>
-                  <div v-for="panel in context.panel">
-                      <div v-for="dataset in panel.dataset" class="tab-pane" v-bind:id="dataset.tabid">
+                  <div v-for="panel in context.panel" class="tab-pane">
+                      <div v-for="dataset in panel.dataset" v-bind:id="dataset.tabid">
                         <h3>{{dataset.tabTitle}}</h3>
                         <hr>
                         <h3>大小</h3>
@@ -82,13 +92,49 @@
 </template>
 
 <script type="es6">
+  import { UiCollapsible } from 'keen-ui'
+
   export default {
+    components: {
+      UiCollapsible,
+    },
+
+    mounted() {
+      setTimeout(() => {
+        // console.log(this.$el.querySelectorAll('.background-image-holder'));
+        // this.$el.querySelectorAll('.background-image-holder').forEach(function($holder) {
+        //     // $(this).addClass('fadeIn');
+        //     console.log($holder)
+        // });
+        this.isFadeIn = true
+      }, 200)
+
+      this.backgroundFadeIn()
+      this.scrollListener()
+    },
+
+    methods: {
+      backgroundFadeIn() {
+        let holder = this.$el.querySelector('.background-image-holder')
+        let holderBackgroundUrl = holder.children[0].src
+        this.holderBackgroundUrl = holderBackgroundUrl
+        this.isNone = true
+      },
+
+      scrollListener() {
+        window.onscroll = (e) => {
+          this.holderTranslateY = (5400 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
+        }
+      },
+    },
+
     data() {
       return {
-        lll: [
-            {'id': '1', 'panelTitle': '11'},
-            {'id': '2', 'panelTitle': '22'},
-        ],
+        isFadeIn: false,
+        holderBackgroundUrl: '',
+        isNone: false,
+        backgroundPosition: 'initial !important',
+        holderTranslateY: '0px',
         context: {
           "panel": [{
             "id": 1,
@@ -299,16 +345,16 @@
         }
       }
     },
-
-    mounted() {
-      
-    },
-
-    methods: {
-      
-    }
-    
   }
 </script>
 <style>
+.ui-collapsible__header-content {
+  color: #47b475 !important;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.ui-collapsible a {
+  font-size: 1em;
+}
 </style>
