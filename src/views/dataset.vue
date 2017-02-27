@@ -10,7 +10,7 @@
           <div class="col-sm-12 text-center">
             <h2 class="uppercase mb8">搜狗天工智能研究院数据集</h2>
             <p class="lead mb40">我们为学术应用提供免费的大数据及分布式计算平台</p>
-            <a class="btn btn-lg btn-white mb0">Get Started</a>
+            <a class="btn btn-lg btn-white mb0" v-on:click="startClicked">Get Started</a>
           </div>
         </div>
       </div>
@@ -31,11 +31,11 @@
                         </ul>
                       </div>
                     </li> -->
-                    <ui-collapsible title="数据集介绍">
-                      <li><a href="#intro" data-toggle="tab">详细介绍</a></li>
+                    <ui-collapsible title="数据集介绍" v-bind:open="isDefaultOpen">
+                      <li><a href="#intro" data-toggle="tab" v-on:click="menuClicked" class="menu-a" id="default-menu">详细介绍</a></li>
                     </ui-collapsible>
                     <ui-collapsible v-for="panel in context.panel" v-bind:title="panel.panelTitle">
-                        <li v-for="dataset in panel.dataset" v-bind:class="dataset.initState"><a v-bind:href="'#' + dataset.tabid" data-toggle="tab">{{dataset.tabTitle}}</a></li>
+                        <li v-for="dataset in panel.dataset" v-bind:class="dataset.initState"><a v-bind:href="'#' + dataset.tabid" data-toggle="tab" v-on:click="menuClicked" class="menu-a">{{dataset.tabTitle}}</a></li>
                     </ui-collapsible>
                 </ul>
                 
@@ -48,8 +48,8 @@
                       </p>
                     </div>
                   </div>
-                  <div v-for="panel in context.panel" class="tab-pane">
-                      <div v-for="dataset in panel.dataset" v-bind:id="dataset.tabid">
+                  <div v-for="panel in context.panel">
+                      <div v-for="dataset in panel.dataset" v-bind:id="dataset.tabid" class="tab-pane">
                         <h3>{{dataset.tabTitle}}</h3>
                         <hr>
                         <h3>大小</h3>
@@ -123,8 +123,47 @@
 
       scrollListener() {
         window.onscroll = (e) => {
-          this.holderTranslateY = (5400 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
+          this.holderTranslateY = (1200 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
         }
+      },
+
+      menuClicked(e) {
+        this.hideAllTabPane()
+        this.showTabPane(e.target.href.substr(e.target.href.indexOf('#')))
+        this.chooseMenu(e.target)
+        e.preventDefault()
+      },
+
+      hideAllTabPane() {
+        let tabPanes = document.querySelectorAll('.tab-pane')
+        tabPanes.forEach((tabPane => {
+          tabPane.style.display = 'none'
+        }))
+      },
+
+      showTabPane(paneId) {
+        let tabPane = document.querySelector(paneId)
+        tabPane.style.display = 'block'
+      },
+
+      chooseMenu(target) {
+        this.removeAllMenuChosenStatus()
+        target.parentElement.classList.add('chosen')
+      },
+
+      removeAllMenuChosenStatus() {
+        let menuAs = document.querySelectorAll('.menu-a')
+        menuAs.forEach(menuA => {
+          menuA.parentElement.classList.remove('chosen')
+        })
+      },
+
+      startClicked() {
+        this.removeAllMenuChosenStatus()
+        this.isDefaultOpen = true
+        let defaultMenuItem = document.querySelector('#default-menu')
+        defaultMenuItem.click()
+        defaultMenuItem.parentElement.classList.add('chosen')
       },
     },
 
@@ -135,6 +174,7 @@
         isNone: false,
         backgroundPosition: 'initial !important',
         holderTranslateY: '0px',
+        isDefaultOpen: false,
         context: {
           "panel": [{
             "id": 1,
@@ -356,5 +396,19 @@
 
 .ui-collapsible a {
   font-size: 1em;
+}
+.tab-pane {
+  display: none;
+}
+.active {
+  display: block;
+}
+
+.chosen {
+  background-color: #47b475;
+}
+
+.chosen a {
+  color: #fff !important;
 }
 </style>
