@@ -13,6 +13,10 @@ const route = new VueRouter({
   },{
     path:'/races', component:require('../views/races')
   },{
+    path:'/login', component:require('../views/login')
+  },{
+    path:'/register', component:require('../views/register')
+  },{
     path:'*',redirect:'/index'
   }]
 })
