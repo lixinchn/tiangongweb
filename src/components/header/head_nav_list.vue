@@ -10,10 +10,10 @@
     </div>
 
     <div class="module widget-handle language left">
-      <ul class="menu">
-        <li class="has-dropdown">
+      <ul class="menu lang-menu">
+        <li class="has-dropdown" v-on:click="toggleDropdown">
           <a href="#">中文</a>
-          <ul>
+          <ul v-bind:style="{visibility: visibility, display: display}">
             <li><a href="#">English</a></li>
           </ul>        
         </li>
@@ -27,6 +27,21 @@
     name:'head-nav-list',
     data(){
       return {
+        visibility: 'initial',
+        display: 'none',
+      }
+    },
+
+    methods: {
+      toggleDropdown() {
+        console.log(this.visibility)
+        if (this.visibility == 'initial') {
+          this.visibility = 'visible'
+          this.display = 'block'
+        } else {
+          this.visibility = 'initial'
+          this.display = 'none'
+        }
       }
     }
   }
