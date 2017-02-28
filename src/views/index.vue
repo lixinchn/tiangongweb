@@ -12,25 +12,16 @@
               <h3>最新资讯</h3>
               <hr>
               <ul class="link-list recent-posts">
-                <li>
-                  <a href="#">天工研究院召开项目规划研讨会</a>
-                  <span class="date">February
-                  <span class="number">14, 2015</span>
-                  </span>
-                </li>
-                <li>
-                  <a href="#">王小川谈天工研究院</a>
-                  <span class="date">February
-                  <span class="number">9, 2015</span>
-                  </span>
-                </li>
-                <li>
-                  <a href="#">天工研究院成立</a>
-                  <span class="date">January
-                  <span class="number">27, 2015</span>
+                <li v-for="item in news">
+                  <a v-bind:href="item.url" style="cursor: pointer">{{item.title}}</a>
+                  <span class="date">
+                    <span class="number">{{item.date}}</span>
                   </span>
                 </li>
               </ul>
+              <div>
+                <a href="#" style="float: right;">查看更多</a>
+              </div>
             </div>
           </div>
         </div>
@@ -113,6 +104,8 @@
 </template>
 
 <script type="es6">
+  import {transferDate} from '../assets/js/util'
+
   export default {
     data() {
       return {
@@ -122,10 +115,12 @@
         isNone: false,
         backgroundPosition: 'initial !important',
         holderTranslateY: '0px',
+        news: [],
       }
     },
 
     mounted() {
+      this.fetchAndRenderNews()
       setTimeout(() => {
         // console.log(this.$el.querySelectorAll('.background-image-holder'));
         // this.$el.querySelectorAll('.background-image-holder').forEach(function($holder) {
@@ -151,6 +146,38 @@
         window.onscroll = (e) => {
           this.holderTranslateY = (600 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
         }
+      },
+
+      fetchAndRenderNews() {
+        this.$http.get('/news/latest').then(response => {
+          console.log(response)
+        }, response => {
+          let news = [
+             {
+                  "title": "天工研究院召开项目规划研讨会",
+                  "url": "http://www.sogou.com/",
+                  "time": 1488179074
+              },
+              {
+                  "title": "王小川谈天工研究院",
+                  "url": "http://www.sogou.com/",
+                  "time": 1488179074
+              },
+              {
+                  "title": "天工研究院成立",
+                  "url": "http://www.sogou.com/",
+                  "time": 1488179074
+              }
+          ];
+
+          news.forEach((item, index, news) => {
+            news[index] = Object.assign({
+              'date': transferDate(item.time)
+            }, item)
+          })
+          this.news = news.slice(0, 3)
+          console.log(response)
+        })
       },
     }
     
