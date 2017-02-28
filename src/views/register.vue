@@ -20,7 +20,8 @@
   export default {
     methods: {
       doLogin() {
-        this.errorCheck()
+        if (!this.errorCheck())
+          return
 
         this.$http.post('/user/register', this.user).then(response => {
           console.log(response)
@@ -34,23 +35,25 @@
         if (!this.user.username || !this.user.password || !this.user.passwordConfirm ||
             !this.user.username.trim()) {
           this.error = '用户名和密码不能为空'
-          return
+          return false
         }
 
         if (this.user.password !== this.user.passwordConfirm) {
           this.error = '两次输入的密码必须一致'
-          return
+          return false
         }
 
         if (this.user.password.length < 6) {
           this.error = '密码必须大于等于6位'
-          return
+          return false
         }
 
         if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.user.username)) {
           this.error = '邮箱不合法'
-          return
+          return false
         }
+
+        return true
       },
     },
     

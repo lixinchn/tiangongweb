@@ -18,12 +18,25 @@
   export default {
     methods: {
       doLogin() {
+        if (!this.errorCheck())
+          return
+
+        this.$http.post('/user/login', this.user).then(response => {
+          console.log(response)
+        }, response => {
+          console.log(response)
+        })
+      },
+
+      errorCheck() {
         this.error = null
         if (!this.user.username || !this.user.password ||
             !this.user.username.trim()) {
           this.error = '用户名和密码不能为空'
-          return
+          return false
         }
+
+        return true
       },
     },
 
