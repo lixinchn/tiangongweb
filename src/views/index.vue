@@ -105,6 +105,7 @@
 
 <script type="es6">
   import {transferDate} from '../assets/js/util'
+  import {conf} from '../assets/js/conf'
 
   export default {
     data() {
@@ -122,11 +123,6 @@
     mounted() {
       this.fetchAndRenderNews()
       setTimeout(() => {
-        // console.log(this.$el.querySelectorAll('.background-image-holder'));
-        // this.$el.querySelectorAll('.background-image-holder').forEach(function($holder) {
-        //     // $(this).addClass('fadeIn');
-        //     console.log($holder)
-        // });
         this.isFadeIn = true
       }, 200)
 
@@ -149,33 +145,15 @@
       },
 
       fetchAndRenderNews() {
-        this.$http.get('/news/latest').then(response => {
-          console.log(response)
-        }, response => {
-          let news = [
-             {
-                  "title": "天工研究院召开项目规划研讨会",
-                  "url": "http://www.sogou.com/",
-                  "time": 1488179074
-              },
-              {
-                  "title": "王小川谈天工研究院",
-                  "url": "http://www.sogou.com/",
-                  "time": 1488179074
-              },
-              {
-                  "title": "天工研究院成立",
-                  "url": "http://www.sogou.com/",
-                  "time": 1488179074
-              }
-          ];
-
+        this.$http.get(conf.host + '/news/latest').then(response => {
+          let news = response.body
           news.forEach((item, index, news) => {
             news[index] = Object.assign({
               'date': transferDate(item.time)
             }, item)
           })
           this.news = news.slice(0, 3)
+        }, response => {
           console.log(response)
         })
       },
