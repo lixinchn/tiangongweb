@@ -1,18 +1,18 @@
 <template>
-  <div class="main-container">
+  <div class="main-container back-rl">
     <form class="pure-form pure-form-stacked" v-on:submit.prevent="doLogin" id="register-form">
     <fieldset>
-      <h3>注册</h3>
+      <h4>注册</h4>
 <!--       <label for="username">邮箱</label>
       <input id="username" v-model="user.username" type="text" placeholder=""> -->
       <div>
-        <label for="username">手机号：</label>
-        <input id="username" v-model="user.username" type="text" placeholder="">
-        <button v-on:click.prevent="getCode" type="submit" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code">{{valBtn}}</button>
+        <label for="phone">手机号：</label>
+        <input id="phone" v-model="user.phone" type="text" placeholder="">
+        <button v-on:click.prevent="onGetVerificationCode" type="submit" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code" style="font-size: 1em;">{{valBtn}}</button>
       </div>
       <div>
-        <label for="username">验证码：</label>
-        <input id="username" v-model="user.username" type="text" placeholder="">
+        <label for="verificationCode">验证码：</label>
+        <input id="verificationCode" v-model="user.verificationCode" type="text" placeholder="">
       </div>
 
       <div>
@@ -26,7 +26,7 @@
       </div>
       <div>
         <label></label>
-        <button type="submit" class="pure-button pure-button-primary">注册</button>
+        <button type="submit" class="pure-button pure-button-primary" style="font-size: 1.4em">注册</button>
       </div>
       <p v-if="error" class="register-error">{{error}}</p>
     </fieldset>
@@ -37,8 +37,11 @@
 <script type="es6">
   export default {
     methods: {
-      getCode() {
+      onGetVerificationCode() {
         if (this.isGray)
+          return
+
+        if (!this.errorCheckBeforeVerificationCode())
           return
 
         this.isGray = true
@@ -55,6 +58,27 @@
           }
           this.changeBtnText(text)
         }, 1000)
+
+        // 获取验证码
+        this.getVerificationCode()
+      },
+
+      errorCheckBeforeVerificationCode() {
+        this.error = null
+        if (!this.user.phone) {
+          this.error = '手机号不能为空'
+          return false
+        }
+
+        if (this.user.phone.length !== 11) {
+          this.error = '手机号不正确'
+          return false
+        }
+        return true
+      },
+
+      getVerificationCode() {
+        // TODO
       },
 
       changeBtnText(text) {
@@ -62,7 +86,7 @@
       },
 
       doLogin() {
-        if (!this.errorCheck())
+        if (!this.errorCheckBeforeReg())
           return
 
         this.$http.post('/user/register', this.user).then(response => {
@@ -72,11 +96,16 @@
         })
       },
 
-      errorCheck() {
+      errorCheckBeforeReg() {
         this.error = null
-        if (!this.user.username || !this.user.password || !this.user.passwordConfirm ||
-            !this.user.username.trim()) {
-          this.error = '用户名和密码不能为空'
+        if (!this.user.phone || !this.user.password || !this.user.passwordConfirm ||
+            !this.user.phone.trim()) {
+          this.error = '手机和密码不能为空'
+          return false
+        }
+
+        if (!this.user.verificationCode) {
+          this.error ='验证码不能为空'
           return false
         }
 
@@ -90,10 +119,10 @@
           return false
         }
 
-        if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.user.username)) {
-          this.error = '邮箱不合法'
-          return false
-        }
+        // if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.user.username)) {
+        //   this.error = '邮箱不合法'
+        //   return false
+        // }
 
         return true
       },
@@ -105,6 +134,7 @@
           phone: null,
           password: null,
           passwordConfirm: null,
+          verificationCode: null,
         },
         error: null,
         valBtn: '发送验证码',
@@ -114,12 +144,18 @@
   }
 </script>
 <style>
+.back-rl {
+  background: url(../assets/img/back_rl.png) no-repeat;
+  background-size: cover;
+}
+
 #register-form {
   /*margin: 4em;*/
   width: 50%;
   margin: 2em auto;
   box-shadow: 0px 0px 10px -1px  #888888;
   padding: 1em;
+  background: #fff;
 }
 
 #register-form .code-gray {
@@ -127,7 +163,7 @@
   border: 2px solid #C7C7C7;
 }
 
-#register-form h3 {
+#register-form h4 {
   text-align: center;
 }
 
@@ -136,22 +172,25 @@
 }
 
 #register-form input {
-  width: 60%;
+  width: 62%;
+  background: #fff;
+  border: 1px solid #c7c7c7;
 }
 
 #register-form label {
-  width: 15%;
+  width: 14%;
   text-align: left;
-  padding-left: 2em;
+  padding-left: 2%;
 }
 
 #register-form button {
-  width: 60%;
+  width: 62%;
 }
 
 #register-form .val-code {
-  width: 22%;
+  width: 20%;
   display: inline-block;
+  margin-left: 2%;
 }
 
 </style>
