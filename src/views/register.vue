@@ -100,7 +100,7 @@
         this.error = null
         if (!this.user.phone || !this.user.password || !this.user.passwordConfirm ||
             !this.user.phone.trim()) {
-          this.error = '手机和密码不能为空'
+          this.error = '手机号和密码不能为空'
           return false
         }
 

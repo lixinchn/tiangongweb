@@ -9,7 +9,12 @@
             <h3 class="mb-xs-16">清华大学天工智能计算研究院</h3>
             <h6 class="uppercase mb16">由清华大学和搜狗公司联合建立，其也是首个校企合作的中国人工智能领域研究院。研究院将致力于人工智能领域的前沿技术研究，向世界人工智能顶级水平迈进。</h6>
             <div class="widget">
-              <h3>最新资讯</h3>
+              <div class="news-title">
+                <img src="../assets/img/news_icon.png" class="news_icon">
+                <p>最新资讯</p>
+                <a href="#" style="float: right;">查看更多</a>
+                <div style="clear:both;"></div>
+              </div>
               <hr>
               <ul class="link-list recent-posts">
                 <li v-for="item in news">
@@ -19,9 +24,6 @@
                   </span>
                 </li>
               </ul>
-              <div>
-                <a href="#" style="float: right;">查看更多</a>
-              </div>
             </div>
           </div>
         </div>
@@ -162,4 +164,22 @@
   }
 </script>
 <style>
+.news_title {
+  display: table-cell;
+}
+
+.news-title img {
+  height: 1.8em;
+  float: left;
+  margin-right: 0.7em;
+  margin-bottom: 0.5em;
+}
+
+.news-title p {
+  font-size: 1.6em;
+  font-weight: bold;
+  float: left;
+  margin: 0;
+}
+
 </style>
