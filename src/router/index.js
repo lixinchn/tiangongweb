@@ -17,6 +17,8 @@ const route = new VueRouter({
   },{
     path:'/register', component:require('../views/register')
   },{
+    path: '/pwd_retrieve', component:require('../views/pwd_retrieve')
+  },{
     path:'*',redirect:'/index'
   }]
 })

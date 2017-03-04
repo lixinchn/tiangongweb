@@ -7,7 +7,7 @@
 
         <div>
           <img class="login-user" src="../assets/img/login-user.png">
-          <input id="login-phone" v-model="user.phone" type="text" placeholder="用户名/邮箱">
+          <input id="login-phone" v-model="user.phone" type="text" placeholder="手机号">
         </div>
 
         <div>
