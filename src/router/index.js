@@ -19,6 +19,8 @@ const route = new VueRouter({
   },{
     path: '/pwd_retrieve', component:require('../views/pwd_retrieve')
   },{
+    path: '/user_info', component:require('../views/user_info')
+  },{
     path:'*',redirect:'/index'
   }]
 })
