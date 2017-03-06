@@ -17,7 +17,6 @@ import 'keen-ui/dist/keen-ui.min.css'
 import VuePaginate from 'vue-paginate'
 
 
-
 Vue.use(VueResource)
 Vue.use(VuePaginate)
 

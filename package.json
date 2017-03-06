@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "keen-ui": "^1.0.0",
+    "query-string": "^4.3.2",
     "vue": "^2.1.10",
     "vue-paginate": "^3.4.0",
     "vue-router": "^2.2.0"

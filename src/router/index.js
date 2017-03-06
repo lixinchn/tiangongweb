@@ -23,6 +23,8 @@ const route = new VueRouter({
   },{
     path: '/news_list', component:require('../views/news_list')
   },{
+    path: '/news_content', component:require('../views/news_content')
+  },{
     path:'*',redirect:'/index'
   }]
 })

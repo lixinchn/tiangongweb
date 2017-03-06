@@ -16,7 +16,7 @@
 
               <paginate name="news" :list="news" :per="10" class="paginate-list">
                 <li v-for="item in paginated('news')" class="news-list-li">
-                  <a class="news-list-a" v-bind:href="item.url" style="cursor: pointer">{{item.title}}</a>
+                  <a class="news-list-a" v-bind:href="'/news_content?id=' + item.id" style="cursor: pointer">{{item.title}}</a>
                   <span class="date news-list-right">
                     <span class="number">{{item.date}}</span>
                   </span>
