@@ -18,7 +18,7 @@
               <hr>
               <ul class="link-list recent-posts">
                 <li v-for="item in news">
-                  <a v-bind:href="item.url" style="cursor: pointer">{{item.title}}</a>
+                  <a v-bind:href="'/news_content?id=' + item.id" style="cursor: pointer">{{item.title}}</a>
                   <span class="date">
                     <span class="number">{{item.date}}</span>
                   </span>

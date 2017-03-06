@@ -10,7 +10,7 @@
       </div>
 
       <div class="news_content_content">
-        <h1>{{title}}</h1>
+        <h1 style="font-size: 3em; font-weight: 400;">{{title}}</h1>
         <div class="news_content_at">
           <p class="news_content_author">作者：{{author}}</p>
           <p class="news_content_time">发布时间：{{time}}</p>
