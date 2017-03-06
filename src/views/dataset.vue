@@ -9,7 +9,7 @@
           <div class="col-sm-12 text-center">
             <h2 class="uppercase mb8">搜狗天工智能研究院数据集</h2>
             <p class="lead mb40">我们为学术应用提供免费的大数据及分布式计算平台</p>
-            <a class="btn btn-lg btn-white mb0" v-on:click="startClicked">Get Started</a>
+            <a class="btn btn-lg btn-white mb0" v-on:click="startClicked" href="#dataset-begin">Get Started</a>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <h4 class="uppercase mb80">天工智能数据研究院数据集</h4>
+            <h4 class="uppercase mb80" id="dataset-begin">天工智能数据研究院数据集</h4>
             <div class="tabbable">
                 <ul class="nav nav-pills nav-stacked col-md-3" id="accordion">
                     <!-- <li class="active"><a href="#intro" data-toggle="tab">数据集介绍</a></li>
