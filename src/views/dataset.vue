@@ -113,6 +113,7 @@
     methods: {
       onApply() {
         this.$http.get(conf.host + '/dataset/apply?dataname=' + this.chosenName + '&obtain=2').then(response => {
+          // TODO
           console.log(response)
         }, response => {
           console.log(response)

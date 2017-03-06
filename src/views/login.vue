@@ -30,16 +30,34 @@
 </template>
 
 <script type="es6">
+  import {conf} from '../assets/js/conf'
+  import queryString from 'query-string'
+
   export default {
     methods: {
+      getRedirect(search) {
+        const parsed = queryString.parse(search)
+        return parsed.redirect || '/index'
+      },
+
       doLogin() {
         if (!this.errorCheck())
           return
 
-        this.$http.post('/user/login', this.user).then(response => {
-          console.log(response)
+        let formData = new FormData()
+        formData.append('phone', this.user.phone)
+        formData.append('password', this.user.password)
+        this.$http.post(conf.host + '/user/login', formData).then(response => {
+          let result = response.body
+          if (result.code) {
+            this.error = result.msg
+          } else {
+            let redirect = this.getRedirect(location.search)
+            location.href = redirect
+          }
         }, response => {
           console.log(response)
+          this.error = '发生错误，请稍后再试'
         })
       },
 

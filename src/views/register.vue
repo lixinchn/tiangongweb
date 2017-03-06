@@ -35,6 +35,7 @@
 </template>
 
 <script type="es6">
+  import {conf} from '../assets/js/conf'
   export default {
     methods: {
       onGetVerificationCode() {
