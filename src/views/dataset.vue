@@ -117,7 +117,7 @@
 
       scrollListener() {
         window.onscroll = (e) => {
-          this.holderTranslateY = (1200 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
+          this.holderTranslateY = (100 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
         }
       },
 
@@ -388,6 +388,18 @@
   font-weight: bold;
 }
 
+.ui-collapsible__header {
+  background-color: #fff !important;
+}
+
+.ui-collapsible__header[aria-expanded='true'] {
+  background-color: #eee !important;
+}
+
+.ui-collapsible__header:hover {
+  background-color: #eee !important;
+}
+
 .ui-collapsible a {
   font-size: 1em;
 }
@@ -404,5 +416,25 @@
 
 .chosen a {
   color: #fff !important;
+}
+
+.menu-a {
+  display: block;
+  width: 100%;
+  height: 3em;
+  line-height: 3em;
+}
+
+.ui-collapsible__body li {
+  border-radius: 3px;
+  padding-left: 1em;
+}
+
+.ui-collapsible__body li.chosen {
+  background-color: #47b475 !important;
+}
+
+.ui-collapsible__body li:hover {
+  background-color: #eee;
 }
 </style>

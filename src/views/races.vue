@@ -98,7 +98,7 @@
 
       scrollListener() {
         window.onscroll = (e) => {
-          this.holderTranslateY = (1200 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
+          this.holderTranslateY = (100 * (window.pageYOffset / document.body.scrollHeight)) + 'px'
         }
       },
     },
