@@ -12,7 +12,7 @@
               <div class="news-title">
                 <img src="../assets/img/news_icon.png" class="news_icon">
                 <p>最新资讯</p>
-                <a href="#" style="float: right;">查看更多</a>
+                <a href="/news_list" style="float: right;">查看更多</a>
                 <div style="clear:both;"></div>
               </div>
               <hr>
@@ -177,7 +177,7 @@
 
 .news-title p {
   font-size: 1.6em;
-  font-weight: bold;
+  font-weight: 400;
   float: left;
   margin: 0;
 }

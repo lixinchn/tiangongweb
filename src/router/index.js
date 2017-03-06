@@ -21,6 +21,8 @@ const route = new VueRouter({
   },{
     path: '/user_info', component:require('../views/user_info')
   },{
+    path: '/news_list', component:require('../views/news_list')
+  },{
     path:'*',redirect:'/index'
   }]
 })
