@@ -43,7 +43,7 @@
           let news = response.body
           if (news.data) {
             this.title = news.data.title
-            this.author = news.data.author
+            this.author = news.data.author || '无'
             this.time = transferDate(news.data.publish)
             this.content = news.data.content
           }
