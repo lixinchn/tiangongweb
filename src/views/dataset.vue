@@ -31,9 +31,39 @@
                 </ul>
 
 
-                <div class="tab-content col-md-9">
+                <div class="tab-content col-md-9" v-show="contentShow" id="dataset-content">
                   <div v-html="content"></div>
-                  <button v-on:click.prevent="onApply" type="submit" v-show="buttonShow" class="pure-button pure-button-primary dataset-button">申请</button>
+                  <a v-bind:href="download" v-show="downloadShow">下载数据样例</a>
+                  <button v-on:click.prevent="onBeforeApply" type="submit" v-show="buttonShow" class="pure-button pure-button-primary dataset-button">申请</button>
+                </div>
+
+                <div class="tab-content col-md-9" v-show="applicationShow">
+                   <form class="pure-form pure-form-stacked" v-on:submit.prevent="onApply" id="application-form">
+                    <fieldset>
+                      <div>
+                        <label for="name">姓名：</label>
+                        <input id="name" v-model="user.name" type="text" placeholder="">
+                      </div>
+                      <div>
+                        <label for="email">邮箱：</label>
+                        <input id="email" v-model="user.email" type="text" placeholder="">
+                      </div>
+
+                      <div>
+                        <label for="phone">联系电话：</label>
+                        <input id="phone" v-model="user.phone" type="text" placeholder="">
+                      </div>
+                      <div>
+                        <label for="use">用途：</label>
+                        <input id="use" v-model="user.use" type="text" placeholder="">
+                      </div>
+                      <div>
+                        <label></label>
+                        <button type="submit" class="pure-button pure-button-primary" style="font-size: 1.4em">提交</button>
+                      </div>
+                      <p v-if="error" class="register-error">{{error}}</p>
+                    </fieldset>
+                  </form>
                 </div>
 
                 <!-- <ul class="tab-content col-md-9">
@@ -111,13 +141,35 @@
     },
 
     methods: {
+      onBeforeApply() {
+        this.contentShow = false
+        this.applicationShow = true
+      },
+
       onApply() {
-        this.$http.get(conf.host + '/dataset/apply?dataname=' + this.chosenName + '&obtain=2').then(response => {
+        if (!this.onErrorCheck())
+          return
+
+        let formData = new FormData()
+        formData.append('name', this.user.name)
+        formData.append('phone', this.user.phone)
+        formData.append('email', this.user.email)
+        formData.append('use', this.user.use)
+        formData.append('id', this.chosenId)
+        this.$http.post(conf.host + '/dataset/apply', formData).then(response => {
           // TODO
           console.log(response)
         }, response => {
           console.log(response)
         })
+      },
+
+      onErrorCheck() {
+        if (!this.user.name || !this.user.email || !this.user.phone || !this.user.use) {
+          this.error = '请填写完整'
+          return false
+        }
+        return true
       },
 
       backgroundFadeIn() {
@@ -139,10 +191,20 @@
         this.chooseMenu(e.target)
         this.buttonShow = false
         this.content = dataset.content
+        this.download = dataset.download
+
+        // display dataset content
         if (this.content) {
           this.buttonShow = true
-          this.chosenName = dataset.name
+          this.contentShow = true
+          this.applicationShow = false
+          this.chosenId = dataset.id
         }
+
+        // display sample download button
+        if (this.download)
+          this.downloadShow = true
+
         e.preventDefault()
       },
 
@@ -172,7 +234,27 @@
 
       getDataset() {
         this.$http.get(conf.host + '/dataset/page').then(response => {
-          this.datasets = response.body.data.list
+          let data = response.body.data
+          if (!data)
+            return
+
+          Object.keys(data).forEach(key => {
+            let subs = {}
+            subs['category'] = key
+            subs['subs'] = []
+            data[key].forEach(sub => {
+              subs['subs'].push(sub)
+            })
+            this.datasets.push(subs)
+
+            // this.datasets.push({
+            //   'category': key,
+            //   'id': data[key].id,
+            //   'name': data[key].name,
+            //   'download': data[key].download,
+            //   'content': data[key].content,
+            // })
+          })
         }, response => {
           console.log(response)
         })
@@ -189,7 +271,18 @@
         datasets: [],
         content: '',
         buttonShow: false,
-        chosenName: '',
+        chosenId: '',
+        contentShow: true,
+        applicationShow: false,
+        user: {
+          name: '',
+          email: '',
+          phone: '',
+          use: '',
+        },
+        error: '',
+        downloadShow: false,
+        download: '',
 
         // context: {
         //   "panel": [{
@@ -475,4 +568,32 @@
   display: block;
   font-size: 1.5em !important;
 }
+
+#application-form {
+  margin: 1em auto;
+  text-align: center;
+}
+
+
+#application-form input {
+  width: 62%;
+  background: #fff;
+  border: 1px solid #c7c7c7;
+}
+
+#application-form label {
+  width: 14%;
+  text-align: left;
+  padding-left: 2%;
+  min-width: 6em;
+}
+
+#application-form button {
+  width: 62%;
+}
+
+#dataset-content {
+  padding-left: 2em;
+}
+
 </style>

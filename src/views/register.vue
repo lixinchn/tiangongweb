@@ -20,7 +20,7 @@
         <input id="password" v-model="user.password" type="password" placeholder="">
       </div>
       <div>
-        <label for="password">密码确认：</label>
+        <label for="passwordConfirm">密码确认：</label>
         <input id="passwordConfirm" v-model="user.passwordConfirm" type="password" 
       placeholder="">
       </div>
