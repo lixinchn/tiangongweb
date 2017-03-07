@@ -8,7 +8,7 @@
       <div>
         <label for="phone">手机号：</label>
         <input id="phone" v-model="user.phone" type="text" placeholder="">
-        <!-- <button v-on:click.prevent="onGetVerificationCode" type="submit" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code" style="font-size: 1em;">{{valBtn}}</button> -->
+        <button v-on:click.prevent="onGetVerificationCode" type="submit" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code" style="font-size: 1em;">{{valBtn}}</button>
       </div>
       <div>
         <label for="verificationCode">验证码：</label>
@@ -39,53 +39,54 @@
 
   export default {
     methods: {
-      // onGetVerificationCode() {
-      //   if (this.isGray)
-      //     return
+      onGetVerificationCode() {
+        if (this.isGray)
+          return
 
-      //   if (!this.errorCheckBeforeVerificationCode())
-      //     return
+        if (!this.errorCheckBeforeVerificationCode())
+          return
 
-      //   this.isGray = true
-      //   let countdown = 60
-      //   this.changeBtnText(countdown + '秒后重发')
+        this.isGray = true
+        let countdown = 60
+        this.changeBtnText(countdown + '秒后重发')
 
-      //   let intervalId = setInterval(() => {
-      //     --countdown
-      //     let text = countdown + '秒后重发'
-      //     if (countdown < 0) {
-      //       text = '发送验证码'
-      //       this.isGray = false
-      //       clearInterval(intervalId)
-      //     }
-      //     this.changeBtnText(text)
-      //   }, 1000)
+        let intervalId = setInterval(() => {
+          --countdown
+          let text = countdown + '秒后重发'
+          if (countdown < 0) {
+            text = '发送验证码'
+            this.isGray = false
+            clearInterval(intervalId)
+          }
+          this.changeBtnText(text)
+        }, 1000)
 
-      //   // 获取验证码
-      //   this.getVerificationCode()
-      // },
+        // 获取验证码
+        console.log(this.user.phone)
+        this.getVerificationCode()
+      },
 
-      // errorCheckBeforeVerificationCode() {
-      //   this.error = null
-      //   if (!this.user.phone) {
-      //     this.error = '手机号不能为空'
-      //     return false
-      //   }
+      errorCheckBeforeVerificationCode() {
+        this.error = null
+        if (!this.user.phone) {
+          this.error = '手机号不能为空'
+          return false
+        }
 
-      //   if (this.user.phone.length !== 11) {
-      //     this.error = '手机号不正确'
-      //     return false
-      //   }
-      //   return true
-      // },
+        if (this.user.phone.length !== 11) {
+          this.error = '手机号不正确'
+          return false
+        }
+        return true
+      },
 
-      // getVerificationCode() {
-      //   // TODO
-      // },
+      getVerificationCode() {
+        // TODO
+      },
 
-      // changeBtnText(text) {
-      //   this.valBtn = text
-      // },
+      changeBtnText(text) {
+        this.valBtn = text
+      },
 
       doLogin() {
         if (!this.errorCheckBeforeReg())
