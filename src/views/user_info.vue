@@ -56,8 +56,8 @@
     data() {
       return {
         widgetShow: {
-          'uinfo': false,
-          'uapplication': true,
+          'uinfo': true,
+          'uapplication': false,
         },
 
         list: [

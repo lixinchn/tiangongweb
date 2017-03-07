@@ -1,8 +1,8 @@
 <template>
   <div class="uinfo">
     <div v-for="item in this.uinfo" class="uinfo-item">
-      <p>{{item.p}}</p>
-      <p>{{item.content}}</p>
+      <p style="width: 5em;">{{item.p}}</p>
+      <p style="margin:1em;">{{item.content}}</p>
       <button :disabled="item.disabled" class="pure-button" v-bind:class="item.isModify ? item.classSave : item.classModify" v-on:click="onButtonClicked(item)">{{item.button}}</button>
       <hr style="clear: both;">
     </div>
@@ -10,18 +10,63 @@
 </template>
 
 <script type="es6">
+  import {conf} from '../assets/js/conf'
+
   export default {
     name: 'uinfo',
     methods: {
       onButtonClicked(item) {
+        if (item.isModify)
+          this.saveInfoToserver()
         item.isModify = !item.isModify
         item.button = item.isModify ? this.buttonTextSave : this.buttonTextModify
-        // TODO: save info to server
-      }
+      },
+
+      fillUserinfo(userinfo) {
+        if (!userinfo)
+          return
+
+        this.uinfo.forEach(item => {
+          if (userinfo[item.key]) {
+            item.content = userinfo[item.key]
+          }
+        })
+      },
+
+      saveInfoToserver() {
+        let formData = new FormData()
+        this.uinfo.forEach(item => {
+          formData.append(item.key, item.content.trim())
+        })
+
+        this.$http.post(conf.host + '/user/randcode', formData).then(response => {
+          let result = response.body
+          if (result.code) {
+            alert(result.msg)
+            return
+          }
+        }, response => {
+          console.log(response)
+          alert('发生错误，请稍后再试')
+        })
+      },
     },
 
     created() {
-      // TODO: get info from server
+      this.$http.get(conf.host + '/user/info').then(response => {
+        let result = response.body
+        if (result.code) {
+          location.href = '/login'
+          return
+        }
+
+        let userinfo = result.data
+        this.fillUserinfo(userinfo)
+      }, response => {
+        console.log(response)
+        alert('发生错误，请稍后再试')
+      })
+
       this.uinfo.forEach(item => {
         item.button = '修改'
         item.classModify = 'uinfo-modify'
@@ -35,8 +80,12 @@
         buttonTextSave: '保存',
 
         uinfo: [
-         {'p': '手机', 'key': 'phone', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false, 'disabled': true},
+         {'p': '手机：', 'key': 'phone', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false, 'disabled': true},
          {'p': '邮箱：', 'key': 'email', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': '名字：', 'key': 'username', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': '地址：', 'key': 'addr', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': '所在机构：', 'key': 'company', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': '研究兴趣：', 'key': 'interest', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
         ],
       }
     },

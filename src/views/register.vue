@@ -7,7 +7,7 @@
       <input id="username" v-model="user.username" type="text" placeholder=""> -->
       <div>
         <label for="phone">手机号：</label>
-        <input id="phone" v-model="user.phone" type="text" placeholder="">
+        <input id="username" name="username" v-model="user.phone" type="text" placeholder="">
         <button v-on:click.prevent="onGetVerificationCode" type="submit" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code" style="font-size: 1em;">{{valBtn}}</button>
       </div>
       <div>
@@ -114,7 +114,7 @@
             this.error = result.msg
           } else { // success
             let redirect = this.getRedirect(location.search)
-            location.href = redirect
+            // location.href = redirect
           }
         }, response => {
           console.log(response)

@@ -14,16 +14,34 @@
 </template>
 
 <script type="es6">
+  import {conf} from '../assets/js/conf'
   export default {
     name: 'uapplication',
     methods: {
+      fillDatasets(datasets) {
+        if (!datasets)
+          return
+
+        datasets.forEach(dataset => {
+          this.application.push({'id': dataset.id, 'name': dataset.name, 'status': dataset.status})
+        })
+      },
     },
 
     created() {
-      this.application.push({'name': 'name', 'status': '成功'})
-      this.application.push({'name': 'name', 'status': '失败'})
+      this.$http.get(conf.host + '/dataset/list').then(response => {
+        let result = response.body
+        if (result.code) {
+          location.href = '/login'
+          return
+        }
 
-      // TODO get data from server
+        let datasets = result.data.list
+        this.fillDatasets(datasets)
+      }, response => {
+        console.log(response)
+        alert('发生错误，请稍后再试')
+      })
     },
 
     data() {
