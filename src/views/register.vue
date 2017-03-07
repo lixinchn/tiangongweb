@@ -1,6 +1,6 @@
 <template>
   <div class="main-container back-rl">
-    <form class="pure-form pure-form-stacked" v-on:submit.prevent="doLogin" id="register-form">
+    <form class="pure-form pure-form-stacked" v-on:submit.prevent="doRegister" id="register-form">
     <fieldset>
       <h4>注册</h4>
 <!--       <label for="username">邮箱</label>
@@ -36,9 +36,15 @@
 
 <script type="es6">
   import {conf} from '../assets/js/conf'
+  import queryString from 'query-string'
 
   export default {
     methods: {
+      getRedirect(search) {
+        const parsed = queryString.parse(search)
+        return parsed.redirect || '/index'
+      },
+
       onGetVerificationCode() {
         if (this.isGray)
           return
@@ -62,8 +68,7 @@
         }, 1000)
 
         // 获取验证码
-        console.log(this.user.phone)
-        this.getVerificationCode()
+        this.getVerificationCode(this.user.phone)
       },
 
       errorCheckBeforeVerificationCode() {
@@ -80,22 +85,40 @@
         return true
       },
 
-      getVerificationCode() {
-        // TODO
+      getVerificationCode(phone) {
+        let formData = new FormData()
+        formData.append('phone', this.user.phone)
+        this.$http.post(conf.host + '/user/randcode', formData).then(response => {
+          console.log(response)
+        }, response => {
+          console.log(response)
+          this.error = '发生错误，请稍后再试'
+        })
       },
 
       changeBtnText(text) {
         this.valBtn = text
       },
 
-      doLogin() {
+      doRegister() {
         if (!this.errorCheckBeforeReg())
           return
 
-        this.$http.post(conf.host + '/user/register', this.user).then(response => {
-          console.log(response)
+        let formData = new FormData()
+        formData.append('phone', this.user.phone)
+        formData.append('password', this.user.password)
+        formData.append('randcode', this.user.verificationCode)
+        this.$http.post(conf.host + '/user/register', formData).then(response => {
+          let result = response.body
+          if (result.code === 1) { // error
+            this.error = result.msg
+          } else { // success
+            let redirect = this.getRedirect(location.search)
+            location.href = redirect
+          }
         }, response => {
           console.log(response)
+          this.error = '发生错误，请稍后再试'
         })
       },
 
@@ -154,8 +177,8 @@
 
 #register-form {
   /*margin: 4em;*/
-  width: 50%;
-  margin: 2em auto;
+  width: 60%;
+  margin: 5em auto;
   box-shadow: 0px 0px 10px -1px  #888888;
   padding: 1em;
   background: #fff;
@@ -184,6 +207,7 @@
   width: 14%;
   text-align: left;
   padding-left: 2%;
+  min-width: 6em;
 }
 
 #register-form button {
@@ -194,6 +218,7 @@
   width: 20%;
   display: inline-block;
   margin-left: 2%;
+  min-width: 6em;
 }
 
 </style>

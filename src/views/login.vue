@@ -36,8 +36,7 @@
   export default {
     methods: {
       getRedirect(search) {
-        const parsed = queryString.parse(search)
-        return parsed.redirect || '/index'
+        return this.redirect || '/index'
       },
 
       doLogin() {
@@ -73,6 +72,11 @@
       },
     },
 
+    created() {
+      const parsed = queryString.parse(location.search)
+      this.redirect = parsed.redirect
+    },
+
     data() {
       return {
         user: {
@@ -80,6 +84,7 @@
           password: null,
         },
         error: null,
+        redirect: '',
       }
     },
   }
