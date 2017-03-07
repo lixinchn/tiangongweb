@@ -1,10 +1,10 @@
 <template>
   <div class="uinfo">
     <div v-for="item in this.uinfo" class="uinfo-item">
-      <p style="width: 5em;">{{item.p}}</p>
-      <p style="margin:1em;">{{item.content}}</p>
-      <button :disabled="item.disabled" class="pure-button" v-bind:class="item.isModify ? item.classSave : item.classModify" v-on:click="onButtonClicked(item)">{{item.button}}</button>
-      <hr style="clear: both;">
+      <p style="width: 5em; margin: 1.2em 0 0 0;">{{item.p}}</p>
+      <input :disabled="item.contentDisabled" class="uinfo-input" type="text" style="margin: 0.6em 0; background-color: #fff; min-width: 15em; width: 70%;" v-bind:class="item.isModify ? item.inputClassSave : item.inputClassModify" v-model="item.content">
+      <button :disabled="item.disabled" class="pure-button" style="margin: 1.2em 0 0 0;" v-bind:class="item.isModify ? item.classSave : item.classModify" v-on:click="onButtonClicked(item)">{{item.button}}</button>
+      <hr style="clear: both;"></hr>
     </div>
   </div>
 </template>
@@ -19,6 +19,7 @@
         if (item.isModify)
           this.saveInfoToserver()
         item.isModify = !item.isModify
+        item.contentDisabled = !item.contentDisabled
         item.button = item.isModify ? this.buttonTextSave : this.buttonTextModify
       },
 
@@ -71,6 +72,9 @@
         item.button = '修改'
         item.classModify = 'uinfo-modify'
         item.classSave = 'uinfo-save'
+        item.contentDisabled = true
+        item.inputClassModify = 'uinfo-i-modify'
+        item.inputClassSave = 'uinfo-i-save'
       })
     },
 
@@ -94,9 +98,13 @@
 <style>
 .uinfo {
   float: left;
-  width: 50%;
+  width: 70%;
   padding-left: 4em;
   padding-top: 1em;
+}
+
+.uinfo-input {
+  
 }
 
 .uinfo-item {
@@ -145,5 +153,12 @@
   opacity: 0.2;
 }
 
+.uinfo-i-modify {
+  border: 0;
+}
+
+.uinfo-i-save {
+  border: 1px solid #ccc !important;
+}
 
 </style>
