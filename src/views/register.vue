@@ -8,11 +8,7 @@
       <div>
         <label for="phone">手机号：</label>
         <input id="username" name="username" v-model="user.phone" type="text" placeholder="">
-        <button v-on:click.prevent="onGetVerificationCode" type="submit" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code" style="font-size: 1em;">{{valBtn}}</button>
-      </div>
-      <div>
-        <label for="verificationCode">验证码：</label>
-        <input id="verificationCode" v-model="user.verificationCode" type="text" placeholder="">
+        <button v-on:click.prevent="onGetVerificationCode" type="button" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code" style="font-size: 1em;">{{valBtn}}</button>
       </div>
 
       <div>
@@ -24,6 +20,12 @@
         <input id="passwordConfirm" v-model="user.passwordConfirm" type="password" 
       placeholder="">
       </div>
+
+      <div>
+        <label for="verificationCode">验证码：</label>
+        <input id="verificationCode" v-model="user.verificationCode" type="text" placeholder="">
+      </div>
+
       <div>
         <label></label>
         <button type="submit" class="pure-button pure-button-primary" style="font-size: 1.4em">注册</button>
@@ -219,6 +221,17 @@
   display: inline-block;
   margin-left: 2%;
   min-width: 6em;
+
+  height: 50px;
+  line-height: 48px;
+  border: 2px solid #47b475;
+  background: #47b475;
+  color: #fff;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 0 !important;
 }
 
 </style>
