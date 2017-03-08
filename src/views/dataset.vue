@@ -41,8 +41,8 @@
                    <form class="pure-form pure-form-stacked" v-on:submit.prevent="onApply" id="application-form">
                     <fieldset>
                       <div>
-                        <label for="name">姓名：</label>
-                        <input id="name" v-model="user.name" type="text" placeholder="">
+                        <label for="username">姓名：</label>
+                        <input id="username" v-model="user.username" type="text" placeholder="">
                       </div>
                       <div>
                         <label for="email">邮箱：</label>
@@ -119,7 +119,7 @@
 </template>
 
 <script type="es6">
-  import { UiCollapsible } from 'keen-ui'
+  import {UiCollapsible} from 'keen-ui'
   import {conf} from '../assets/js/conf'
 
   export default {
@@ -142,8 +142,35 @@
 
     methods: {
       onBeforeApply() {
+        this.getUserInfo()
         this.contentShow = false
         this.applicationShow = true
+      },
+
+      getUserInfo() {
+        this.$http.get(conf.host + '/user/info').then(response => {
+          let result = response.body
+          if (result.code) {
+            location.href = '/login?redirect=' + location.href
+            return
+          }
+
+          let userinfo = result.data
+          this.fillUserinfo(userinfo)
+        }, response => {
+          console.log(response)
+          alert('发生错误，请稍后再试')
+        })
+      },
+
+      fillUserinfo(userinfo) {
+        if (!userinfo)
+          return
+
+        Object.keys(this.user).forEach(key => {
+          if (userinfo[key])
+            this.user[key] = userinfo[key]
+        })
       },
 
       onApply() {
@@ -235,9 +262,11 @@
       getDataset() {
         this.$http.get(conf.host + '/dataset/page').then(response => {
           let data = response.body.data
-          if (!data)
+          if (!data || !data.list)
             return
 
+          this.datasets = data.list
+          /*
           Object.keys(data).forEach(key => {
             let subs = {}
             subs['category'] = key
@@ -255,6 +284,7 @@
             //   'content': data[key].content,
             // })
           })
+          */
         }, response => {
           console.log(response)
         })
@@ -275,7 +305,7 @@
         contentShow: true,
         applicationShow: false,
         user: {
-          name: '',
+          username: '',
           email: '',
           phone: '',
           use: '',

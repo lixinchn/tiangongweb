@@ -17,7 +17,7 @@
     methods: {
       onButtonClicked(item) {
         if (item.isModify)
-          this.saveInfoToserver()
+          this.saveInfoToserver(item)
         item.isModify = !item.isModify
         item.contentDisabled = !item.contentDisabled
         item.button = item.isModify ? this.buttonTextSave : this.buttonTextModify
@@ -34,11 +34,14 @@
         })
       },
 
-      saveInfoToserver() {
+      saveInfoToserver(item) {
         let formData = new FormData()
+        /*
         this.uinfo.forEach(item => {
           formData.append(item.key, item.content.trim())
         })
+        */
+        formData.append(item.key, item.content.trim())
 
         this.$http.post(conf.host + '/user/edit', formData).then(response => {
           let result = response.body
