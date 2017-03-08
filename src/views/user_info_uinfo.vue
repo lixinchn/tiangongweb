@@ -40,7 +40,7 @@
           formData.append(item.key, item.content.trim())
         })
 
-        this.$http.post(conf.host + '/user/randcode', formData).then(response => {
+        this.$http.post(conf.host + '/user/edit', formData).then(response => {
           let result = response.body
           if (result.code) {
             alert(result.msg)
