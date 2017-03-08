@@ -31,6 +31,11 @@
         <button type="submit" class="pure-button pure-button-primary" style="font-size: 1.4em">注册</button>
       </div>
       <p v-if="error" class="register-error">{{error}}</p>
+
+      <div class="register-bottom">
+          <a class="register-login" href="/login">已有账号?直接登录</a>
+          <div style="clear: both;"></div>
+      </div>
     </fieldset>
   </form>
   </div>
@@ -232,6 +237,15 @@
   font-weight: bold;
   letter-spacing: 1px;
   border-radius: 0 !important;
+}
+
+.register-bottom {
+  width: 100%;
+}
+
+.register-login {
+  padding-left: 2%;
+  cursor: pointer;
 }
 
 </style>

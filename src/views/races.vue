@@ -127,7 +127,7 @@ a.btn:hover {
     color: #000 !important;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1300px) {
   .price {
     font-size: 4em !important;
     display: block !important;
