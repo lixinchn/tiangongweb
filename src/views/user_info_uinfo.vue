@@ -35,6 +35,9 @@
       },
 
       saveInfoToserver(item) {
+        if (!item.content.trim())
+          return
+        
         let formData = new FormData()
         /*
         this.uinfo.forEach(item => {
