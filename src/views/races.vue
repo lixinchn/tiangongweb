@@ -126,4 +126,11 @@ a.btn:hover {
     background-color: #fff;
     color: #000 !important;
 }
+
+@media screen and (max-width: 1000px) {
+  .price {
+    font-size: 4em !important;
+    display: block !important;
+  }
+}
 </style>
