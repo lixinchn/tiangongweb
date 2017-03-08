@@ -61,7 +61,7 @@
         },
 
         list: [
-          {'content': '个人信息', 'chosen': false, 'href': '#uinfo'},
+          {'content': '个人信息', 'chosen': true, 'href': '#uinfo'},
           {'content': '我的申请', 'chosen': false, 'href': '#uapplication'},
         ],
       }
