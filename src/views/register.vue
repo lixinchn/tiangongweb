@@ -187,8 +187,8 @@
 }
 
 #register-form .code-gray {
-  background-color: #C7C7C7;
-  border: 2px solid #C7C7C7;
+  background-color: #C7C7C7 !important;
+  border: 2px solid #C7C7C7 !important;
 }
 
 #register-form h4 {
