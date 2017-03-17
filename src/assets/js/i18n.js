@@ -101,6 +101,17 @@ let i18n = {
     'race2': {'zh': '其他比赛', 'en': ''},
     'race3': {'zh': '网页排序', 'en': ''},
   },
+
+  'login': {
+    'title': {'zh': '登录', 'en': 'LOGIN'},
+    'phone': {'zh': '手机号', 'en': 'Tel'},
+    'password': {'zh': '密码', 'en': 'password'},
+    'login': {'zh': '登录', 'en': 'Login'},
+    'register': {'zh': '新用户注册', 'en': 'Sign Up'},
+    'forget': {'zh': '忘记密码', 'en': 'Forget Password'},
+    'errorTitle': {'zh': '发生错误，请稍后再试', 'en': 'Error'},
+    'errorTP': {'zh': '手机号和密码不能为空', 'en': 'Tel and Password needed'},
+  },
 }
 
 export {i18n}

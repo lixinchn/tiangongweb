@@ -3,24 +3,24 @@
     <form class="pure-form pure-form-stacked" v-on:submit.prevent="doLogin" id="login-form">
     <fieldset>
       <div class="form-content">
-        <h4 class="login-form-title">登录</h4>
+        <h4 class="login-form-title">{{title}}</h4>
 
         <div>
           <img class="login-user" src="../assets/img/login-user.png">
-          <input id="login-phone" v-model="user.phone" type="text" placeholder="手机号">
+          <input id="login-phone" v-model="user.phone" type="text" v-bind:placeholder="phone">
         </div>
 
         <div>
           <img class="login-pwd" src="../assets/img/login-pwd.png">
-          <input id="login-password" v-model="user.password" type="password" placeholder="密码">
+          <input id="login-password" v-model="user.password" type="password" v-bind:placeholder="password">
         </div>
 
-        <button type="submit" class="pure-button pure-button-primary">登录</button>
+        <button type="submit" class="pure-button pure-button-primary">{{login}}</button>
         <p v-if="error" class="login-error">{{error}}</p>
 
         <div class="login-bottom">
-          <a class="login-reg" href="/register">新用户注册</a>
-          <a class="login-forget-pwd" href="/pwd_retrieve">忘记密码</a>
+          <a class="login-reg" href="/register">{{register}}</a>
+          <a class="login-forget-pwd" href="/pwd_retrieve">{{forget}}</a>
           <div style="clear: both;"></div>
         </div>
       </div>
@@ -32,6 +32,7 @@
 <script type="es6">
   import {conf} from '../assets/js/conf'
   import queryString from 'query-string'
+  import {i18n} from '../assets/js/i18n'
 
   export default {
     methods: {
@@ -56,7 +57,7 @@
           }
         }, response => {
           console.log(response)
-          this.error = '发生错误，请稍后再试'
+          this.error = this.errorTitle
         })
       },
 
@@ -64,7 +65,7 @@
         this.error = null
         if (!this.user.phone || !this.user.password ||
             !this.user.phone.trim()) {
-          this.error = '手机号和密码不能为空'
+          this.error = this.errorTP
           return false
         }
 
@@ -85,6 +86,15 @@
         },
         error: null,
         redirect: '',
+
+        title: i18n.login.title[i18n.lang],
+        phone: i18n.login.phone[i18n.lang],
+        password: i18n.login.password[i18n.lang],
+        login: i18n.login.login[i18n.lang],
+        register: i18n.login.register[i18n.lang],
+        forget: i18n.login.forget[i18n.lang],
+        errorTitle: i18n.login.errorTitle[i18n.lang],
+        errorTP: i18n.login.errorTP[i18n.lang],
       }
     },
   }
