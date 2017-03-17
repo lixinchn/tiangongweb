@@ -6,13 +6,13 @@
       </div>
       <div class="container">
           <div class="col-md-5 col-md-offset-1 col-sm-7 col-sm-offset-1 right">
-            <h3 class="mb-xs-16">清华大学天工智能计算研究院</h3>
-            <h6 class="uppercase mb16">由清华大学和搜狗公司联合建立，其也是首个校企合作的中国人工智能领域研究院。研究院将致力于人工智能领域的前沿技术研究，向世界人工智能顶级水平迈进。</h6>
+            <h3 class="mb-xs-16">{{title}}</h3>
+            <h6 class="uppercase mb16">{{desc}}</h6>
             <div class="widget">
               <div class="news-title">
                 <img src="../assets/img/news_icon.png" class="news_icon">
-                <p>最新资讯</p>
-                <a href="/news_list" style="float: right;">查看更多</a>
+                <p>{{newsTitle}}</p>
+                <a href="/news_list" style="float: right;">{{more}}</a>
                 <div style="clear:both;"></div>
               </div>
               <hr>
@@ -46,7 +46,7 @@
               <a href="dataset">
                 <div class="text-center">
                   <i class="icon ti ti-bar-chart"></i>
-                  <h3 class="uppercase">数据集</h3>
+                  <h3 class="uppercase">{{dataset}}</h3>
                 </div>
               </a>
               <p> </p>
@@ -57,7 +57,7 @@
               <a href="races">
                 <div class="text-center">
                   <i class="ti-infinite icon"></i>
-                  <h3 class="uppercase">比赛</h3>
+                  <h3 class="uppercase">{{race}}</h3>
                 </div>
               </a>
               <p> </p>
@@ -68,7 +68,7 @@
               <a href="about_us">
                 <div class="text-center">
                   <i class="ti-heart icon"></i>
-                  <h3 class="uppercase">关于我们</h3>
+                  <h3 class="uppercase">{{aboutUs}}</h3>
                 </div>
               </a>
               <p> </p>
@@ -78,7 +78,7 @@
       </div>
     </section>
     <section>
-      <h1 class="text-center">研究成果</h1>
+      <h1 class="text-center">{{research}}</h1>
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
@@ -108,6 +108,7 @@
 <script type="es6">
   import {transferDate} from '../assets/js/util'
   import {conf} from '../assets/js/conf'
+  import {i18n} from '../assets/js/i18n'
 
   export default {
     data() {
@@ -119,6 +120,15 @@
         backgroundPosition: 'initial !important',
         holderTranslateY: '0px',
         news: [],
+
+        title: i18n.index.title[i18n.lang],
+        desc: i18n.index.desc[i18n.lang],
+        newsTitle: i18n.index.newsTitle[i18n.lang],
+        more: i18n.index.more[i18n.lang],
+        dataset: i18n.index.dataset[i18n.lang],
+        race: i18n.index.race[i18n.lang],
+        aboutUs: i18n.index.aboutUs[i18n.lang],
+        research: i18n.index.research[i18n.lang],
       }
     },
 
