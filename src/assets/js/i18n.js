@@ -19,6 +19,21 @@ let i18n = {
     'login': {'zh': '登录', 'en': 'login'},
     'zh': {'zh': '中文', 'en': '中文'},
     'en': {'zh': 'English', 'en': 'English'},
+  },
+
+  'dataset': {
+    'title': {'zh': '搜狗天工智能研究院数据集', 'en': ''},
+    'desc': {'zh': '我们为学术应用提供免费的大数据及分布式计算平台', 'en': ''},
+    'start': {'zh': '开始', 'en': 'Get Started'},
+    'dataset': {'zh': '天工智能数据研究院数据集', 'en': ''},
+    'download': {'zh': '下载数据样例', 'en': 'Download Sample'},
+    'apply': {'zh': '申请', 'en': 'apply'},
+    'name': {'zh': '姓名：', 'en': 'name: '},
+    'email': {'zh': '邮箱：', 'en': 'email: '},
+    'tel': {'zh': '联系电话：', 'en': 'tel: '},
+    'purpose': {'zh': '用途：', 'en': 'purpose: '},
+    'submit': {'zh': '提交', 'en': 'submit'},
+    'errorComplete': {'zh': '请填写完整', 'en': 'Please complete all the required fields.'},
   }
 }
 
