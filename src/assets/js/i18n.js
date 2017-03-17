@@ -9,6 +9,16 @@ let i18n = {
     'race': {'zh': '比赛', 'en': 'race'},
     'aboutUs': {'zh': '关于我们', 'en': 'about us'},
     'research': {'zh': '研究成果', 'en': 'Research'},
+  },
+
+  'head': {
+    'index': {'zh': '首页', 'en': 'index'},
+    'dataset': {'zh': '数据集', 'en': 'dataset'},
+    'aboutUs': {'zh': '关于我们', 'en': 'about us'},
+    'race': {'zh': '测评', 'en': 'race'},
+    'login': {'zh': '登录', 'en': 'login'},
+    'zh': {'zh': '中文', 'en': '中文'},
+    'en': {'zh': 'English', 'en': 'English'},
   }
 }
 

@@ -2,10 +2,10 @@
   <div class="module-group right">
     <div class="module left">
       <ul class="menu">
-        <li><a href="index">首页</a></li>
-        <li><a href="dataset">数据集</a></li>
-        <li><a href="about_us">关于我们</a></li>
-        <li><a href="races">测评</a></li>
+        <li><a href="index">{{index}}</a></li>
+        <li><a href="dataset">{{dataset}}</a></li>
+        <li><a href="about_us">{{aboutUs}}</a></li>
+        <li><a href="races">{{race}}</a></li>
         <li v-show="loginShow"><a v-bind:href="loginHref">{{loginText}}</a></li>
       </ul>
     </div>
@@ -13,9 +13,9 @@
     <div class="module widget-handle language left">
       <ul class="menu lang-menu">
         <li class="has-dropdown" v-on:click="toggleDropdown">
-          <a href="#">中文</a>
+          <a href="#">{{zh}}</a>
           <ul v-bind:style="{visibility: visibility, display: display}">
-            <li><a href="#">English</a></li>
+            <li><a href="#">{{en}}</a></li>
           </ul>        
         </li>
       </ul>
@@ -25,6 +25,7 @@
 
 <script type="es6">
   import {conf} from '../../assets/js/conf'
+  import {i18n} from '../../assets/js/i18n'
 
   export default {
     name: 'head-nav-list',
@@ -35,6 +36,14 @@
         loginHref: '',
         loginText: '',
         loginShow: false,
+
+        index: i18n.head.index[i18n.lang],
+        dataset: i18n.head.dataset[i18n.lang],
+        aboutUs: i18n.head.aboutUs[i18n.lang],
+        race: i18n.head.race[i18n.lang],
+        login: i18n.head.login[i18n.lang],
+        zh: i18n.head.zh[i18n.lang],
+        en: i18n.head.en[i18n.lang],
       }
     },
 
@@ -44,7 +53,7 @@
         this.loginShow = true
         if (result.code) {
           this.loginHref = 'login'
-          this.loginText = '登录'
+          this.loginText = this.login
           return
         }
 
