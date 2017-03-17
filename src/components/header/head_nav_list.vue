@@ -52,6 +52,7 @@
         let result = response.body
         this.loginShow = true
         if (result.code) {
+          console.log(this.login)
           this.loginHref = 'login'
           this.loginText = this.login
           return

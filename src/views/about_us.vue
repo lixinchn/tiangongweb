@@ -158,7 +158,7 @@
               <img alt="Pic" class="image-small inline-block mb24" src="../assets/img/avatar1.png">
               <h4>{{member7}}</h4>
               <span>
-              <strong>{{mco}}</strong> {{mtitle7}}</span>
+              <strong>{{mco7}}</strong> {{mtitle7}}</span>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 text-center col-centered">

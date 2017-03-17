@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
-            <h3 class="uppercase mb0">天工数据测评</h3>
+            <h3 class="uppercase mb0">{{title}}</h3>
           </div>
         </div>
       </div>
@@ -16,59 +16,59 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
-            <h4 class="uppercase mb16">Lorem Ipsum</h4>
+            <h4 class="uppercase mb16">{{desc1}}</h4>
             <p class="lead mb64">
-              Mauris eu tortor at justo vehicula fermentum. Nulla lobortis diam sit amet sem rhoncus venenatis.
+              {{desc2}}
             </p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 col-sm-6">
             <div class="pricing-table pt-2 text-center">
-              <h5 class="uppercase">翻译大赛</h5>
+              <h5 class="uppercase">{{race1}}</h5>
               <span class="price">$30,000</span>
-              <a class="btn btn-filled btn-lg" href="#">Get Started</a>
+              <a class="btn btn-filled btn-lg" href="#">{{rbegin}}</a>
               <ul>
-                <li><b>发布时间:</b>2016/05/01</li>
-                <li><b>最好成绩</b>:97.34%</li>
+                <li><b>{{rtime}}:</b>2016/05/01</li>
+                <li><b>{{rscore}}</b>:97.34%</li>
                 <li>
-                  <strong>最好成绩更新日</strong>:2016/05/26
+                  <strong>{{rscoretime}}</strong>:2016/05/26
                 </li>
                 <li>
-                  <strong>参赛人数</strong>:5132
+                  <strong>{{rmembers}}</strong>:5132
                 </li>
               </ul>
             </div>
           </div>
           <div class="col-md-4 col-sm-6">
             <div class="pricing-table pt-2 text-center">
-              <h5 class="uppercase">其他比赛</h5>
+              <h5 class="uppercase">{{race2}}</h5>
               <span class="price">$30,000</span>
-              <a class="btn btn-filled btn-lg" href="#">Get Started</a>
+              <a class="btn btn-filled btn-lg" href="#">{{rbegin}}</a>
               <ul>
-                <li><b>发布时间</b> 2016/05/01
+                <li><b>{{rtime}}</b> 2016/05/01
                 </li>
                 <li>
-                  <strong>最好成绩</strong>:97.34%
+                  <strong>{{rscore}}</strong>:97.34%
                 </li>
-                <li><strong>最好成绩更新日</strong>:2016/05/26</li>
-                <li><strong>参赛人数</strong>:5132</li>
+                <li><strong>{{rscoretime}}</strong>:2016/05/26</li>
+                <li><strong>{{rmembers}}</strong>:5132</li>
               </ul>
             </div>
           </div>
           <div class="col-md-4 col-sm-6">
             <div class="pricing-table pt-2 text-center">
-              <h5 class="uppercase">网页排序</h5>
+              <h5 class="uppercase">{{race3}}</h5>
               <span class="price">$30,000</span>
-              <a class="btn btn-filled btn-lg" href="#">Get Started</a>
+              <a class="btn btn-filled btn-lg" href="#">{{rbegin}}</a>
               <ul>
-                <li><b>发布时间</b> 2016/05/01
+                <li><b>{{rtime}}</b> 2016/05/01
                 </li>
                 <li>
-                  <strong>最好成绩</strong>:97.34%
+                  <strong>{{rscore}}</strong>:97.34%
                 </li>
-                <li><strong>最好成绩更新日</strong>:2016/05/26</li>
-                <li><strong>参赛人数</strong>:5132</li>
+                <li><strong>{{rscoretime}}</strong>:2016/05/26</li>
+                <li><strong>{{rmembers}}</strong>:5132</li>
               </ul>
             </div>
           </div>
@@ -79,6 +79,7 @@
 </template>
 
 <script type="es6">
+  import {i18n} from '../assets/js/i18n'
   export default {
     mounted() {
       setTimeout(() => {
@@ -110,6 +111,17 @@
         isNone: false,
         backgroundPosition: 'initial !important',
         holderTranslateY: '0px',
+        title: i18n.races.title[i18n.lang],
+        desc1: i18n.races.desc1[i18n.lang],
+        desc2: i18n.races.desc2[i18n.lang],
+        race1: i18n.races.race1[i18n.lang],
+        race2: i18n.races.race2[i18n.lang],
+        race3: i18n.races.race3[i18n.lang],
+        rbegin: i18n.races.rbegin[i18n.lang],
+        rtime: i18n.races.rtime[i18n.lang],
+        rscore: i18n.races.rscore[i18n.lang],
+        rscoretime: i18n.races.rscoretime[i18n.lang],
+        rmembers: i18n.races.rmembers[i18n.lang],
       }
     },
   }

@@ -87,6 +87,20 @@ let i18n = {
     'mco11': {'zh': '清华大学计算机系', 'en': ''},
     'mtitle11': {'zh': '副教授', 'en': ''},
   },
+
+  'races': {
+    'title': {'zh': '天工数据测评', 'en': ''},
+    'desc1': {'zh': 'Lorem Ipsum', 'en': ''},
+    'desc2': {'zh': 'Mauris eu tortor at justo vehicula fermentum. Nulla lobortis diam sit amet sem rhoncus venenatis.', 'en': ''},
+    'race1': {'zh': '翻译大赛', 'en': ''},
+    'rbegin': {'zh': '开始', 'en': 'Get Started'},
+    'rtime': {'zh': '发布时间', 'en': ''},
+    'rscore': {'zh': '最好成绩', 'en': ''},
+    'rscoretime': {'zh': '最好成绩更新日', 'en': ''},
+    'rmembers': {'zh': '参赛人数', 'en': ''},
+    'race2': {'zh': '其他比赛', 'en': ''},
+    'race3': {'zh': '网页排序', 'en': ''},
+  },
 }
 
 export {i18n}
