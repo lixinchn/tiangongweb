@@ -2,38 +2,38 @@
   <div class="main-container back-rl">
     <form class="pure-form pure-form-stacked" v-on:submit.prevent="doRegister" id="register-form">
     <fieldset>
-      <h4>注册</h4>
+      <h4>{{title}}</h4>
 <!--       <label for="username">邮箱</label>
       <input id="username" v-model="user.username" type="text" placeholder=""> -->
       <div>
-        <label for="phone">手机号：</label>
+        <label for="phone">{{phone}}</label>
         <input id="username" name="username" v-model="user.phone" type="text" placeholder="">
         <button v-on:click.prevent="onGetVerificationCode" type="button" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code" style="font-size: 1em;">{{valBtn}}</button>
       </div>
 
       <div>
-        <label for="password">密码：</label>
+        <label for="password">{{password}}</label>
         <input id="password" v-model="user.password" type="password" placeholder="">
       </div>
       <div>
-        <label for="passwordConfirm">密码确认：</label>
+        <label for="passwordConfirm">{{passwordConfirm}}</label>
         <input id="passwordConfirm" v-model="user.passwordConfirm" type="password" 
       placeholder="">
       </div>
 
       <div>
-        <label for="verificationCode">验证码：</label>
+        <label for="verificationCode">{{authcode}}</label>
         <input id="verificationCode" v-model="user.verificationCode" type="text" placeholder="">
       </div>
 
       <div>
         <label></label>
-        <button type="submit" class="pure-button pure-button-primary" style="font-size: 1.4em">注册</button>
+        <button type="submit" class="pure-button pure-button-primary" style="font-size: 1.4em">{{title}}</button>
       </div>
       <p v-if="error" class="register-error">{{error}}</p>
 
       <div class="register-bottom">
-          <a class="register-login" href="/login">已有账号?直接登录</a>
+          <a class="register-login" href="/login">{{login}}</a>
           <div style="clear: both;"></div>
       </div>
     </fieldset>
@@ -44,6 +44,7 @@
 <script type="es6">
   import {conf} from '../assets/js/conf'
   import queryString from 'query-string'
+  import {i18n} from '../assets/js/i18n'
 
   export default {
     methods: {
@@ -61,13 +62,13 @@
 
         this.isGray = true
         let countdown = 60
-        this.changeBtnText(countdown + '秒后重发')
+        this.changeBtnText(countdown + this.second)
 
         let intervalId = setInterval(() => {
           --countdown
-          let text = countdown + '秒后重发'
+          let text = countdown + this.second
           if (countdown < 0) {
-            text = '发送验证码'
+            text = this.sendAuthCode
             this.isGray = false
             clearInterval(intervalId)
           }
@@ -81,12 +82,12 @@
       errorCheckBeforeVerificationCode() {
         this.error = null
         if (!this.user.phone) {
-          this.error = '手机号不能为空'
+          this.error = this.errorPhoneEmpty
           return false
         }
 
         if (this.user.phone.length !== 11) {
-          this.error = '手机号不正确'
+          this.error = this.errorPhoneInvalid
           return false
         }
         return true
@@ -99,7 +100,7 @@
           console.log(response)
         }, response => {
           console.log(response)
-          this.error = '发生错误，请稍后再试'
+          this.error = this.errorTitle
         })
       },
 
@@ -125,7 +126,7 @@
           }
         }, response => {
           console.log(response)
-          this.error = '发生错误，请稍后再试'
+          this.error = this.errorTitle
         })
       },
 
@@ -133,22 +134,22 @@
         this.error = null
         if (!this.user.phone || !this.user.password || !this.user.passwordConfirm ||
             !this.user.phone.trim()) {
-          this.error = '手机号和密码不能为空'
+          this.error = this.errorTP
           return false
         }
 
         if (!this.user.verificationCode) {
-          this.error ='验证码不能为空'
+          this.error = this.errorAuthCode
           return false
         }
 
         if (this.user.password !== this.user.passwordConfirm) {
-          this.error = '两次输入的密码必须一致'
+          this.error = this.errorSamePassword
           return false
         }
 
         if (this.user.password.length < 6) {
-          this.error = '密码必须大于等于6位'
+          this.error = this.errorLength
           return false
         }
 
@@ -170,8 +171,24 @@
           verificationCode: null,
         },
         error: null,
-        valBtn: '发送验证码',
+        valBtn: i18n.register.sendAuthCode[i18n.lang],
         isGray: false,
+
+        title: i18n.register.title[i18n.lang],
+        phone: i18n.register.phone[i18n.lang],
+        password: i18n.register.password[i18n.lang],
+        passwordConfirm: i18n.register.passwordConfirm[i18n.lang],
+        authcode: i18n.register.authcode[i18n.lang],
+        login: i18n.register.login[i18n.lang],
+        second: i18n.register.second[i18n.lang],
+        sendAuthCode: i18n.register.sendAuthCode[i18n.lang],
+        errorPhoneEmpty: i18n.register.errorPhoneEmpty[i18n.lang],
+        errorPhoneInvalid: i18n.register.errorPhoneInvalid[i18n.lang],
+        errorTitle: i18n.register.errorTitle[i18n.lang],
+        errorTP: i18n.register.errorTP[i18n.lang],
+        errorAuthCode: i18n.register.errorAuthCode[i18n.lang],
+        errorSamePassword: i18n.register.errorSamePassword[i18n.lang],
+        errorLength: i18n.register.errorLength[i18n.lang],
       }
     },
   }

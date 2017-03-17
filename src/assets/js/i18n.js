@@ -112,6 +112,24 @@ let i18n = {
     'errorTitle': {'zh': '发生错误，请稍后再试', 'en': 'Error'},
     'errorTP': {'zh': '手机号和密码不能为空', 'en': 'Tel and Password needed'},
   },
+
+  'register': {
+    'title': {'zh': '注册', 'en': 'Sign Up'},
+    'phone': {'zh': '手机号：', 'en': 'Tel: '},
+    'password': {'zh': '密码：', 'en': 'Password: '},
+    'passwordConfirm': {'zh': '密码确认：', 'en': 'Re Enter Password: '},
+    'authcode': {'zh': '验证码：', 'en': 'Auth Code: '},
+    'login': {'zh': '已有账号?直接登录', 'en': 'Have an account? Login'},
+    'second': {'zh': '秒后重发', 'en': 's'},
+    'sendAuthCode': {'zh': '发送验证码', 'en': 'Send Auth Code'},
+    'errorPhoneEmpty': {'zh': '手机号不能为空', 'en': 'Tel cannot be empty'},
+    'errorPhoneInvalid': {'zh': '手机号不正确', 'en': 'Invalid Tel'},
+    'errorTitle': {'zh': '发生错误，请稍后再试', 'en': 'Error'},
+    'errorTP': {'zh': '手机号和密码不能为空', 'en': 'Tel and Password needed'},
+    'errorAuthCode': {'zh': '验证码不能为空', 'en': 'Auth code cannot be empty'},
+    'errorSamePassword': {'zh': '两次输入的密码必须一致', 'en': 'Passwords are not same'},
+    'errorLength': {'zh': '密码必须大于等于6位', 'en': 'Password must be at least 6 letters'},
+  },
 }
 
 export {i18n}
