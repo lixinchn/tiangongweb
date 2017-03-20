@@ -183,6 +183,16 @@ let i18n = {
     'company': {'zh': '所在机构：', 'en': 'Company: '},
     'research': {'zh': '研究兴趣：', 'en': 'Research: '},
   },
+
+  'foot': {
+    'title': {'zh': '关于我们', 'en': 'About Us'},
+    'relatedLinks': {'zh': '相关链接', 'en': 'Related Links'},
+    'qinghua': {'zh': '清华大学', 'en': 'QingHua University'},
+    'sogou': {'zh': '搜狗公司', 'en': 'Sogou Co.'},
+    'relatedLicense': {'zh': '相关协议', 'en': 'Related License'},
+    'dataLicense': {'zh': '数据许可协议', 'en': 'Data License'},
+    'contact': {'zh': '联系我们', 'en': 'Contact Us'},
+  },
 }
 
 export {i18n}

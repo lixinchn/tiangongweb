@@ -4,37 +4,37 @@
       <div class="row">
         <div class="col-md-3 col-sm-6">
           <a href="about_us">
-            <h4 class="title">关于我们</h4>
+            <h4 class="title">{{title}}</h4>
           </a>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="widget">
-            <h5>相关链接</h5>
+            <h5>{{relatedLinks}}</h5>
             <hr>
             <ul class="link-list recent-posts">
               <li>
-                <a href="#">清华大学</a>
+                <a href="#">{{qinghua}}</a>
               </li>
               <li>
-                <a href="#">搜狗公司</a>
+                <a href="#">{{sogou}}</a>
               </li>
             </ul>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="widget">
-            <h5>相关协议</h5>
+            <h5>{{relatedLicense}}</h5>
             <hr>
             <ul class="link-list">
               <li>
-                <a href="#">数据许可协议</a>
+                <a href="#">{{dataLicense}}</a>
               </li>
             </ul>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="widget">
-            <h5>联系我们</h5>
+            <h5>{{contact}}</h5>
             <hr>
           </div>
         </div>
@@ -74,9 +74,23 @@
 </template>
 
 <script type="es6">
-export default {
-  name: 'tg-head',
-}
+  import {i18n} from '../../assets/js/i18n'
+
+  export default {
+    name: 'tg-head',
+
+    data() {
+      return {
+        title: i18n.foot.title[i18n.lang],
+        relatedLinks: i18n.foot.relatedLinks[i18n.lang],
+        qinghua: i18n.foot.qinghua[i18n.lang],
+        sogou: i18n.foot.sogou[i18n.lang],
+        relatedLicense: i18n.foot.relatedLicense[i18n.lang],
+        dataLicense: i18n.foot.dataLicense[i18n.lang],
+        contact: i18n.foot.contact[i18n.lang],  
+      }
+    },
+  }
 </script>
 
 
