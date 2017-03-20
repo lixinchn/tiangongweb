@@ -11,6 +11,7 @@
 
 <script type="es6">
   import {conf} from '../assets/js/conf'
+  import {i18n} from '../assets/js/i18n'
 
   export default {
     name: 'uinfo',
@@ -54,7 +55,7 @@
           }
         }, response => {
           console.log(response)
-          alert('发生错误，请稍后再试')
+          alert(this.error)
         })
       },
     },
@@ -71,11 +72,11 @@
         this.fillUserinfo(userinfo)
       }, response => {
         console.log(response)
-        alert('发生错误，请稍后再试')
+        alert(this.error)
       })
 
       this.uinfo.forEach(item => {
-        item.button = '修改'
+        item.button = this.modify
         item.classModify = 'uinfo-modify'
         item.classSave = 'uinfo-save'
         item.contentDisabled = true
@@ -86,17 +87,20 @@
 
     data() {
       return {
-        buttonTextModify: '修改',
-        buttonTextSave: '保存',
+        buttonTextModify: i18n.userinfoU.modify[i18n.lang],
+        buttonTextSave: i18n.userinfoU.save[i18n.lang],
 
         uinfo: [
-         {'p': '手机：', 'key': 'phone', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false, 'disabled': true},
-         {'p': '邮箱：', 'key': 'email', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
-         {'p': '名字：', 'key': 'username', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
-         {'p': '地址：', 'key': 'addr', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
-         {'p': '所在机构：', 'key': 'company', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
-         {'p': '研究兴趣：', 'key': 'interest', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': i18n.userinfoU.phone[i18n.lang], 'key': 'phone', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false, 'disabled': true},
+         {'p': i18n.userinfoU.email[i18n.lang], 'key': 'email', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': i18n.userinfoU.name[i18n.lang], 'key': 'username', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': i18n.userinfoU.addr[i18n.lang], 'key': 'addr', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': i18n.userinfoU.company[i18n.lang], 'key': 'company', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
+         {'p': i18n.userinfoU.research[i18n.lang], 'key': 'interest', 'content': '', 'button': '', 'classModify': '', 'classSave': '', 'isModify': false},
         ],
+
+        error: i18n.userinfoU.error[i18n.lang],
+        modify: i18n.userinfoU.modify[i18n.lang],
       }
     },
   }

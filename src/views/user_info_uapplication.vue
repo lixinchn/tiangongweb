@@ -2,8 +2,8 @@
   <div class="uapplication">
     <table>
       <tr>
-        <th>数据集</th>
-        <th style="width: 20%">状态</th>
+        <th>{{title}}</th>
+        <th style="width: 20%">{{status}}</th>
       </tr>
       <tr v-for="item in this.application" class="uapplication-item">
         <td>{{item.name}}</td>
@@ -15,6 +15,8 @@
 
 <script type="es6">
   import {conf} from '../assets/js/conf'
+  import {i18n} from '../assets/js/i18n'
+
   export default {
     name: 'uapplication',
     methods: {
@@ -40,13 +42,17 @@
         this.fillDatasets(datasets)
       }, response => {
         console.log(response)
-        alert('发生错误，请稍后再试')
+        alert(this.error)
       })
     },
 
     data() {
       return {
         application: [],
+
+        title: i18n.userinfoA.title[i18n.lang],
+        status: i18n.userinfoA.status[i18n.lang],
+        error: i18n.userinfoA.error[i18n.lang],
       }
     },
   }

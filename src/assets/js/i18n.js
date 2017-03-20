@@ -158,7 +158,31 @@ let i18n = {
     'errorEPWD': {'zh': '密码不能为空', 'en': 'Password needed'},
     'errorREPWD': {'zh': '两次输入的密码必须一致', 'en': 'Passwords are not same'},
     'errorLength': {'zh': '密码必须大于等于6位', 'en': 'Password must be at least 6 letters'},
-  }
+  },
+
+  'userinfo': {
+    'title': {'zh': '个人信息查看', 'en': 'USER INFO'},
+    'userinfo': {'zh': '个人信息', 'en': 'User Info'},
+    'myApplication': {'zh': '我的申请', 'en': 'My Application'},
+  },
+
+  'userinfoA': {
+    'title': {'zh': '数据集', 'en': 'Dataset'},
+    'status': {'zh': '状态', 'en': 'Status'},
+    'error': {'zh': '发生错误，请稍后再试', 'en': 'Error occurred'},
+  },
+
+  'userinfoU': {
+    'error': {'zh': '发生错误，请稍后再试', 'en': 'Error occurred'},
+    'modify': {'zh': '修改', 'en': 'Modify'},
+    'save': {'zh': '保存', 'en': 'Save'},
+    'phone': {'zh': '手机：', 'en': 'Tel: '},
+    'email': {'zh': '邮箱：', 'en': 'Email: '},
+    'name': {'zh': '名字：', 'en': 'Name: '},
+    'addr': {'zh': '地址：', 'en': 'Address: '},
+    'company': {'zh': '所在机构：', 'en': 'Company: '},
+    'research': {'zh': '研究兴趣：', 'en': 'Research: '},
+  },
 }
 
 export {i18n}

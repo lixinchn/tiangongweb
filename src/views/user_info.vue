@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="user-info">
-      <h3>个人信息查看</h3>
+      <h3>{{title}}</h3>
       <div class="uinfo-content">
         <ul class="uinfo-list">
           <li v-for="item in this.list" v-bind:class="{chosen: item.chosen}" v-on:click="onListClick">
@@ -18,6 +18,8 @@
 <script type="es6">
   import uinfo from './user_info_uinfo'
   import uapplication from './user_info_uapplication'
+  import {i18n} from '../assets/js/i18n'
+
   export default {
     components: {uinfo, uapplication},
     methods: {
@@ -61,9 +63,11 @@
         },
 
         list: [
-          {'content': '个人信息', 'chosen': true, 'href': '#uinfo'},
-          {'content': '我的申请', 'chosen': false, 'href': '#uapplication'},
+          {'content': i18n.userinfo.userinfo[i18n.lang], 'chosen': true, 'href': '#uinfo'},
+          {'content': i18n.userinfo.myApplication[i18n.lang], 'chosen': false, 'href': '#uapplication'},
         ],
+
+        title: i18n.userinfo.title[i18n.lang],
       }
     },
   }
