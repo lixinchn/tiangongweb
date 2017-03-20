@@ -140,6 +140,24 @@ let i18n = {
 
   'newsList': {
     'title': {'zh': '最新资讯', 'en': 'Latest News'},
+  },
+
+  'pwdRetrieve': {
+    'title': {'zh': '忘记密码', 'en': 'Forgot Password'},
+    'phone': {'zh': '手机号：', 'en': 'Tel: '},
+    'newPwd': {'zh': '新密码：', 'en': 'New Password: '},
+    'reNewPwd': {'zh': '新密码确认：', 'en': 'Re Enter Password: '},
+    'authCode': {'zh': '验证码：', 'en': 'Auth Code: '},
+    'retrievePassword': {'zh': '找回密码', 'en': 'Retrieve Password'},
+    'sendAuthCode': {'zh': '发送验证码', 'en': 'Send auth code'},
+    'errorEP': {'zh': '手机号不能为空', 'en': 'Tel needed'},
+    'errorERP': {'zh': '手机号不正确', 'en': 'Wrong Tel'},
+    'errorTitle': {'zh': '发生错误，请稍后再试', 'en': 'Error occurred'},
+    'succTitle': {'zh': '密码重置成功，请重新登录', 'en': 'Succeed, please re-login'},
+    'errorEA': {'zh': '验证码不能为空', 'en': 'Auth code needed'},
+    'errorEPWD': {'zh': '密码不能为空', 'en': 'Password needed'},
+    'errorREPWD': {'zh': '两次输入的密码必须一致', 'en': 'Passwords are not same'},
+    'errorLength': {'zh': '密码必须大于等于6位', 'en': 'Password must be at least 6 letters'},
   }
 }
 

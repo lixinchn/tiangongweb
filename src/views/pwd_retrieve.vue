@@ -3,10 +3,10 @@
     <form class="pure-form pure-form-stacked" v-on:submit.prevent="doRetrieve" id="retr-form">
     <fieldset>
       <div class="form-content">
-        <h4 class="retr-form-title">忘记密码</h4>
+        <h4 class="retr-form-title">{{title}}</h4>
 
         <div>
-          <label for="phone">手机号：</label>
+          <label for="phone">{{phone}}</label>
           <div style="clear: both;"></div>
           <input id="phone" v-model="user.phone" type="text" placeholder="">
           <button v-on:click.prevent="onGetVerificationCode" type="button" v-bind:class="{'code-gray': isGray}" class="pure-button pure-button-primary val-code" style="font-size: 1em;">{{valBtn}}</button>
@@ -14,21 +14,21 @@
         </div>
 
         <div>
-          <label for="password">新密码：</label>
+          <label for="password">{{newPwd}}</label>
           <div style="clear: both;"></div>
           <input id="password" v-model="user.password" type="password" placeholder="">
           <div style="clear: both;"></div>
         </div>
 
         <div>
-          <label for="passwordConfirm">新密码确认：</label>
+          <label for="passwordConfirm">{{reNewPwd}}</label>
           <div style="clear: both;"></div>
           <input id="passwordConfirm" v-model="user.passwordConfirm" type="password" placeholder="">
           <div style="clear: both;"></div>
         </div>
 
         <div>
-          <label for="verificationCode">验证码：</label>
+          <label for="verificationCode">{{authCode}}</label>
           <div style="clear: both;"></div>
           <input id="verificationCode" v-model="user.verificationCode" type="text" placeholder="">
           <div style="clear: both;"></div>
@@ -36,7 +36,7 @@
 
         <div style="clear: both;"></div>
         <p v-if="error" class="retr-error">{{error}}</p>
-        <button type="submit" class="pure-button pure-button-primary pwd-retr-sub">找回密码</button>
+        <button type="submit" class="pure-button pure-button-primary pwd-retr-sub">{{retrievePassword}}</button>
       </div>
     </fieldset>
   </form>
@@ -45,6 +45,8 @@
 
 <script type="es6">
   import {conf} from '../assets/js/conf'
+  import {i18n} from '../assets/js/i18n'
+
   export default {
     methods: {
       onGetVerificationCode() {
@@ -62,7 +64,7 @@
           --countdown
           let text = countdown + '...'
           if (countdown < 0) {
-            text = '发送验证码'
+            text = this.sendAuthCode
             this.isGray = false
             clearInterval(intervalId)
           }
@@ -76,12 +78,12 @@
       errorCheckBeforeVerificationCode() {
         this.error = null
         if (!this.user.phone) {
-          this.error = '手机号不能为空'
+          this.error = this.errorEP
           return false
         }
 
         if (this.user.phone.length !== 11) {
-          this.error = '手机号不正确'
+          this.error = this.errorERP
           return false
         }
         return true
@@ -94,7 +96,7 @@
           console.log(response)
         }, response => {
           console.log(response)
-          this.error = '发生错误，请稍后再试'
+          this.error = this.errorTitle
         })
       },
 
@@ -117,37 +119,37 @@
             return
           }
 
-          alert('密码重置成功，请重新登录')
+          alert(this.succTitle)
           location.href = '/login'
         }, response => {
-          this.error = '发生错误，请稍后再试'
+          this.error = this.errorTitle
         })
       },
 
       errorCheck() {
         this.error = null
         if (!this.user.phone || !this.user.phone.trim()) {
-          this.error = '手机号不能为空'
+          this.error = this.errorEP
           return false
         }
 
         if (!this.user.verificationCode || !this.user.verificationCode.trim()) {
-          this.error = '验证码不能为空'
+          this.error = this.errorEA
           return false
         }
 
         if (!this.user.password || !this.user.password.trim()) {
-          this.error = '密码不能为空'
+          this.error = this.errorEPWD
           return false
         }
 
         if (this.user.password !== this.user.passwordConfirm) {
-          this.error = '两次输入的密码必须一致'
+          this.error = this.errorREPWD
           return false
         }
 
         if (this.user.password.length < 6) {
-          this.error = '密码必须大于等于6位'
+          this.error = this.errorLength
           return false
         }
 
@@ -164,8 +166,24 @@
           passwordConfirm: '',
         },
         error: null,
-        valBtn: '发送验证码',
+        valBtn: i18n.pwdRetrieve.sendAuthCode[i18n.lang],
         isGray: false,
+
+        title: i18n.pwdRetrieve.title[i18n.lang],
+        phone: i18n.pwdRetrieve.phone[i18n.lang],
+        newPwd: i18n.pwdRetrieve.newPwd[i18n.lang],
+        reNewPwd: i18n.pwdRetrieve.reNewPwd[i18n.lang],
+        authCode: i18n.pwdRetrieve.authCode[i18n.lang],
+        retrievePassword: i18n.pwdRetrieve.retrievePassword[i18n.lang],
+        sendAuthCode: i18n.pwdRetrieve.sendAuthCode[i18n.lang],
+        errorEP: i18n.pwdRetrieve.errorEP[i18n.lang],
+        errorERP: i18n.pwdRetrieve.errorERP[i18n.lang],
+        errorTitle: i18n.pwdRetrieve.errorTitle[i18n.lang],
+        succTitle: i18n.pwdRetrieve.succTitle[i18n.lang],
+        errorEA: i18n.pwdRetrieve.errorEA[i18n.lang],
+        errorREPWD: i18n.pwdRetrieve.errorREPWD[i18n.lang],
+        errorEPWD: i18n.pwdRetrieve.errorEPWD[i18n.lang],
+        errorLength: i18n.pwdRetrieve.errorLength[i18n.lang],
       }
     },
   }
