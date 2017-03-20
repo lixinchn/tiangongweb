@@ -13,10 +13,16 @@
     <div class="module widget-handle language left">
       <ul class="menu lang-menu">
         <li class="has-dropdown" v-on:click="toggleDropdown">
-          <a href="#">{{zh}}</a>
-          <ul v-bind:style="{visibility: visibility, display: display}">
-            <li><a href="#">{{en}}</a></li>
-          </ul>        
+          <!-- <ul v-bind:style="{visibility: visibility, display: display}"> -->
+          <a href="#" v-bind:style="{display: zhDisplay}">{{zh}}</a>
+          <a href="#" v-bind:style="{display: enDisplay}">{{en}}</a>
+          <!-- </ul>         -->
+          <ul v-bind:style="{display: endDisplay}">
+            <li><a href="#" v-on:click.prevent="toggleLang('en')">{{en}}</a></li>
+          </ul>
+          <ul v-bind:style="{display: zhdDisplay}">
+            <li><a href="#" v-on:click.prevent="toggleLang('zh')">{{zh}}</a></li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -31,8 +37,11 @@
     name: 'head-nav-list',
     data() {
       return {
-        visibility: 'initial',
-        display: 'none',
+        // visibility: 'initial',
+        zhDisplay: i18n.lang === 'zh' ? 'block' : 'none',
+        enDisplay: i18n.lang === 'en' ? 'block' : 'none',
+        endDisplay: i18n.lang === 'zh' ? 'block' : 'none',
+        zhdDisplay: i18n.lang === 'en' ? 'block' : 'none',
         loginHref: '',
         loginText: '',
         loginShow: false,
@@ -68,17 +77,26 @@
 
     methods: {
       toggleDropdown() {
-        if (this.visibility == 'initial') {
-          this.visibility = 'visible'
-          this.display = 'block'
-        } else {
-          this.visibility = 'initial'
-          this.display = 'none'
-        }
-      }
-    }
+        if (i18n.lang === 'zh')
+          this.endDisplay = this.endDisplay === 'none' ? 'block' : 'none';
+        else
+          this.zhdDisplay = this.zhdDisplay === 'none' ? 'block' : 'none';
+      },
+
+      toggleLang(lang) {
+        if (lang === 'en')
+          i18n.setEn()
+        else if (lang === 'zh')
+          i18n.setZh()
+
+        location.reload()
+      },
+    },
   }
 </script>
 
 <style>
+/*.has-dropdown ul a {
+  color: #fff !important;
+}*/
 </style>
