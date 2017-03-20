@@ -130,6 +130,17 @@ let i18n = {
     'errorSamePassword': {'zh': '两次输入的密码必须一致', 'en': 'Passwords are not same'},
     'errorLength': {'zh': '密码必须大于等于6位', 'en': 'Password must be at least 6 letters'},
   },
+
+  'newsContent': {
+    'nTitle': {'zh': '最新资讯', 'en': 'Latest News'},
+    'nAuthor': {'zh': '作者：', 'en': 'Author: '},
+    'nTime': {'zh': '发布时间：', 'en': 'Time: '},
+    'nNo': {'zh': '无', 'en': 'None'},
+  },
+
+  'newsList': {
+    'title': {'zh': '最新资讯', 'en': 'Latest News'},
+  }
 }
 
 export {i18n}

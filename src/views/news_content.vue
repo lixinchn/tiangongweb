@@ -4,7 +4,7 @@
       <div class="news_content_back">
         <a href="/news_list">
           <span>&lt;</span>
-          最新资讯
+          {{nTitle}}
         </a>
         <hr>
       </div>
@@ -12,8 +12,8 @@
       <div class="news_content_content">
         <h1 style="font-size: 3em; font-weight: 400;">{{title}}</h1>
         <div class="news_content_at">
-          <p class="news_content_author">作者：{{author}}</p>
-          <p class="news_content_time">发布时间：{{time}}</p>
+          <p class="news_content_author">{{nAuthor}}{{author}}</p>
+          <p class="news_content_time">{{nTime}}{{time}}</p>
           <div style="clear: both;"></div>
         </div>
         <div v-html="content" class="news_content_raw">
@@ -26,6 +26,7 @@
   import queryString from 'query-string'
   import {conf} from '../assets/js/conf'
   import {transferDate} from '../assets/js/util'
+  import {i18n} from '../assets/js/i18n'
 
   export default {
     methods: {
@@ -43,7 +44,7 @@
           let news = response.body
           if (news.data) {
             this.title = news.data.title
-            this.author = news.data.author || '无'
+            this.author = news.data.author || this.nNo
             this.time = transferDate(news.data.publish)
             this.content = news.data.content
           }
@@ -63,6 +64,11 @@
         author: '',
         time: '',
         content: '',
+
+        nTitle: i18n.newsContent.nTitle[i18n.lang],
+        nAuthor: i18n.newsContent.nAuthor[i18n.lang],
+        nTime: i18n.newsContent.nTime[i18n.lang],
+        nNo: i18n.newsContent.nNo[i18n.lang],
       }
     },
   }

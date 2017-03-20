@@ -9,7 +9,7 @@
             <div class="widget">
               <div class="news-title">
                 <img src="../assets/img/news_icon.png" class="news_icon">
-                <p>最新资讯</p>
+                <p>{{title}}</p>
                 <div style="clear:both;"></div>
               </div>
               <hr>
@@ -33,12 +33,14 @@
 <script type="es6">
   import {transferDate} from '../assets/js/util'
   import {conf} from '../assets/js/conf'
+  import {i18n} from '../assets/js/i18n'
 
   export default {
     data() {
       return {
         news: [],
         paginate: ['news'],
+        title: i18n.newsList.title[i18n.lang],
       }
     },
 
