@@ -182,8 +182,7 @@
         }
 
         // display sample download button
-        if (this.download)
-          this.downloadShow = true
+        this.downloadShow = this.download ? true : false
 
         e.preventDefault()
       },
@@ -195,6 +194,7 @@
 
       removeAllMenuChosenStatus() {
         let menuAs = document.querySelectorAll('.menu-a')
+        menuAs = [].slice.call(menuAs)
         menuAs.forEach(menuA => {
           menuA.parentElement.classList.remove('chosen')
         })
