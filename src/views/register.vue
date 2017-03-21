@@ -96,7 +96,7 @@
       getVerificationCode(phone) {
         let formData = new FormData()
         formData.append('phone', this.user.phone)
-        this.$http.post(conf.host + '/user/randcode', formData).then(response => {
+        this.$http.post(conf.randCode, formData).then(response => {
           console.log(response)
         }, response => {
           console.log(response)
@@ -116,7 +116,7 @@
         formData.append('phone', this.user.phone)
         formData.append('password', this.user.password)
         formData.append('randcode', this.user.verificationCode)
-        this.$http.post(conf.host + '/user/register', formData).then(response => {
+        this.$http.post(conf.register, formData).then(response => {
           let result = response.body
           if (result.code === 1) { // error
             this.error = result.msg

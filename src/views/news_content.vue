@@ -40,7 +40,8 @@
         if (!newsId)
           return
 
-        this.$http.get(conf.host + '/news/item?id=' + newsId).then(response => {
+        let url = conf.news + `?id=${newsId}&lang=${i18n.lang}`
+        this.$http.get(url).then(response => {
           let news = response.body
           if (news.data) {
             this.title = news.data.title

@@ -92,7 +92,7 @@
       getVerificationCode() {
         let formData = new FormData()
         formData.append('phone', this.user.phone)
-        this.$http.post(conf.host + '/user/randcode', formData).then(response => {
+        this.$http.post(conf.randCode, formData).then(response => {
           console.log(response)
         }, response => {
           console.log(response)

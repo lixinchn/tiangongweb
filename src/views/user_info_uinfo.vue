@@ -47,7 +47,7 @@
         */
         formData.append(item.key, item.content.trim())
 
-        this.$http.post(conf.host + '/user/edit', formData).then(response => {
+        this.$http.post(conf.userInfoEdit, formData).then(response => {
           let result = response.body
           if (result.code) {
             alert(result.msg)
@@ -61,7 +61,7 @@
     },
 
     created() {
-      this.$http.get(conf.host + '/user/info').then(response => {
+      this.$http.get(conf.userInfo).then(response => {
         let result = response.body
         if (result.code) {
           location.href = '/login'

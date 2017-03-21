@@ -47,7 +47,7 @@
         let formData = new FormData()
         formData.append('phone', this.user.phone)
         formData.append('password', this.user.password)
-        this.$http.post(conf.host + '/user/login', formData).then(response => {
+        this.$http.post(conf.login, formData).then(response => {
           let result = response.body
           if (result.code) {
             this.error = result.msg

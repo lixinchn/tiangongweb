@@ -157,7 +157,8 @@
       },
 
       fetchAndRenderNews() {
-        this.$http.get(conf.host + '/news/latest').then(response => {
+        let url = conf.latestNews + `?lang=${i18n.lang}`
+        this.$http.get(url).then(response => {
           let news = response.body
           news.forEach((item, index, news) => {
             news[index] = Object.assign({

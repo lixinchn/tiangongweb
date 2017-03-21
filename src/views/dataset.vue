@@ -101,7 +101,7 @@
       },
 
       getUserInfo() {
-        this.$http.get(conf.host + '/user/info').then(response => {
+        this.$http.get(conf.userInfo).then(response => {
           let result = response.body
           if (result.code) {
             location.href = '/login?redirect=' + location.href
@@ -136,7 +136,7 @@
         formData.append('email', this.user.email)
         formData.append('use', this.user.use)
         formData.append('id', this.chosenId)
-        this.$http.post(conf.host + '/dataset/apply', formData).then(response => {
+        this.$http.post(conf.datasetApply, formData).then(response => {
           // TODO
           console.log(response)
         }, response => {
@@ -201,7 +201,8 @@
       },
 
       getDataset() {
-        this.$http.get(conf.host + '/dataset/page').then(response => {
+        let url = conf.dataset + `?lang=${i18n.lang}`
+        this.$http.get(url).then(response => {
           let data = response.body.data
           if (!data || !data.list)
             return

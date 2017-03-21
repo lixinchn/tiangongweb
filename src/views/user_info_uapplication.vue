@@ -31,7 +31,8 @@
     },
 
     created() {
-      this.$http.get(conf.host + '/dataset/list').then(response => {
+      let url = conf.datasetList + `?lang=${i18n.lang}`
+      this.$http.get(url).then(response => {
         let result = response.body
         if (result.code) {
           location.href = '/login'

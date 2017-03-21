@@ -57,7 +57,7 @@
     },
 
     created() {
-      this.$http.get(conf.host + '/user/info').then(response => {
+      this.$http.get(conf.userInfo).then(response => {
         let result = response.body
         this.loginShow = true
         if (result.code) {
